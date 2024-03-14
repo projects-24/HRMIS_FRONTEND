@@ -1,0 +1,1 @@
+export default "https://hrmis.onrender.com/api"

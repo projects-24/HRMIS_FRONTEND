@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "components"
+		},
+		{
+			"path": "data"
+		},
+		{
+			"path": "pages"
+		},
+		{
+			"path": "styles"
+		}
+	],
+	"settings": {
+		"emmet.includeLanguages": {
+			"javascript": "javascriptreact"
+		}
+	}
+}

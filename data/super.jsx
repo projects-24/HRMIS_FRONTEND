@@ -1,0 +1,1 @@
+export default "Human resource"
