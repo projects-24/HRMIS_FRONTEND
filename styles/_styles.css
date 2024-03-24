@@ -1,0 +1,57 @@
+.text-italic{
+    font-style: italic;
+}
+._card{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+/* dashboard */
+._dashboard_image_wrapper{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -70px;
+}
+._dashboard_image{
+    height: 100px;
+    height: 100px;
+
+}
+
+
+.flex-start{
+    justify-content: flex-start !important;
+}
+/* Scrool bar */
+
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+*::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #FFF;
+    background-image: -webkit-gradient(linear,
+                    40% 0%,
+                    75% 84%,
+                    from(#444444),
+                    to(#414141),
+                    color-stop(.6,#565756))
+}

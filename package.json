@@ -1,0 +1,39 @@
+{
+  "name": "hr-management",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/charts": "^1.4.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.0",
+    "@mui/styled-engine-sc": "^5.11.0",
+    "@mui/x-data-grid": "^5.17.16",
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "axios": "^1.2.0",
+    "eslint": "8.27.0",
+    "eslint-config-next": "13.0.3",
+    "funuicss": "^2.0.8",
+    "next": "^13.0.3",
+    "rc-table": "^7.28.2",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.12.0",
+    "react-quill": "^2.0.0",
+    "react-table": "^7.8.0",
+    "recharts": "^2.1.16",
+    "styled-components": "^5.3.6",
+    "table-to-excel": "^1.0.6",
+    "table2excel": "^1.0.0",
+    "typescript": "4.8.4"
+  }
+}
