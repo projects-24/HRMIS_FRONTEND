@@ -5,23 +5,10 @@ import Axios  from 'axios';
 import endPoint from '../../components/endPoint';
 import Loader from '../../components/loader';
 import { useEffect } from 'react';
-import departments from '../../data/departments';
-import sections from "../../data/sections"
-import regions from '../../data/regions';
-import jobTitles from "../../data/jobTitles"
 import { useRouter } from 'next/router';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import grades from "../../data/grades"
 import Alert from 'funuicss/ui/alert/Alert';
-import Typography from 'funuicss/component/Typography';
 import Input from 'funuicss/ui/input/Input';
 import Button from 'funuicss/ui/button/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Header from '../../components/Header';
 import Text from 'funuicss/ui/text/Text';
 import { PiPlus } from 'react-icons/pi';

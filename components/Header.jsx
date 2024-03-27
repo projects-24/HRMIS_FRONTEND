@@ -7,7 +7,7 @@ import Text from 'funuicss/ui/text/Text'
 import Link from 'next/link'
 export default function Header({title , sub_title , sub_dir , sub_dir_route}) {
   return (
-    <p className='padding-20 round-edge dark800 text-dark300 margin-bottom-40'>
+    <p className='padding-20 round-edge dark200  margin-bottom-40'>
     <div className='margin-bottom-20'>
       <RowFlex alignItems='center'>
       <Link href="#" legacyBehavior>

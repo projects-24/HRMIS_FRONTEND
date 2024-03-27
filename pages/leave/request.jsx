@@ -13,7 +13,6 @@ import { PiCheck, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiTrash, PiX }
 import ToolTip from 'funuicss/ui/tooltip/ToolTip'
 import Tip from 'funuicss/ui/tooltip/Tip'
 import Input from 'funuicss/ui/input/Input'
-import IconicInput from 'funuicss/ui/input/Iconic'
 import Button from 'funuicss/ui/button/Button'
 import Modal from 'funuicss/ui/modal/Modal'
 import Text from 'funuicss/ui/text/Text'

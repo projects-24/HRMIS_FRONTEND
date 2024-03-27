@@ -136,7 +136,7 @@ startIcon={<PiSignOut />}
 
   <Link href="/dashboard">
     <Button
-    funcss={`text-left flex-start ${active == '1' ? 'card' : ''}`}
+    funcss={`text-left flex-start text-bold text-minified ${active == '1' ? 'dark200 ' : ''}`}
     text="Dashboard"
     rounded
     fullWidth
@@ -147,7 +147,7 @@ startIcon={<PiSignOut />}
   <Link href="/configurations">
     <Button
   style={{marginTop:'1rem'}}
-    funcss={`text-left flex-start ${active == '2' ? 'card' : ''}`}
+    funcss={`text-left flex-start text-bold text-minified ${active == '2' ? 'dark200 ' : ''}`}
     text="Org Settings"
     rounded
     fullWidth
@@ -157,7 +157,7 @@ startIcon={<PiSignOut />}
   <Link href="/staff/profiling">
     <Button
   style={{marginTop:'1rem'}}
-    funcss={`text-left flex-start ${active == '3' ? 'card' : ''}`}
+    funcss={`text-left flex-start text-bold text-minified ${active == '3' ? 'dark200 ' : ''}`}
     text="Staff Profiling"
     rounded
     fullWidth
@@ -166,7 +166,7 @@ startIcon={<PiSignOut />}
     </Link>
     <Button
   style={{marginTop:'1rem'}}
-    funcss={`text-left flex-start ${active == '4' ? 'card' : ''}`}
+    funcss={`text-left flex-start text-bold text-minified ${active == '4' ? 'dark200 ' : ''}`}
     text="Leave Management"
     rounded
     fullWidth
@@ -183,7 +183,7 @@ startIcon={<PiSignOut />}
    <Link href="/leave/request">
    <Button
  style={{marginTop:'1rem'}}
-   funcss={`text-left flex-start`}
+   funcss={`text-left flex-start text-bold text-minified`}
    text="Leave Request"
    rounded
    fullWidth
@@ -193,7 +193,7 @@ startIcon={<PiSignOut />}
    <Link href="/leave/planing">
    <Button
  style={{marginTop:'1rem'}}
-   funcss={`text-left flex-start`}
+   funcss={`text-left flex-start text-bold text-minified`}
    text="Leave Planing"
    rounded
    fullWidth
@@ -203,7 +203,7 @@ startIcon={<PiSignOut />}
    <Link href="/leave/configuration">
    <Button
  style={{marginTop:'1rem'}}
-   funcss={`text-left flex-start`}
+   funcss={`text-left flex-start text-bold text-minified`}
    text="Configuration"
    rounded
    fullWidth
@@ -227,62 +227,7 @@ startIcon={<PiSignOut />}
     />
  </div>
 
-{
-// isAdmin ?
-<>
 
-  {/* <Link href="/staff/profiling">
-      <div className="button section">
-      <i className="lni lni-users"></i> Staff Profiling
-      </div>
-    </Link>
-  
-          <div className="dropDown">
-    <div className='lighter padding pointer hover-up  trigger' style={{margin:'1.5rem 0' , borderRadius:"5rem"}} onClick={TriggerDrop}>
-      <i className="icon-action-undo"></i> Leave Mgt {dropdown === 0 ? <i className="icon-arrow-down"></i> : <i className="icon-arrow-up"></i>}
-      </div>
-      <div className="dropContent" style={{maxHeight:`${dropdown}px`,overflow:"auto"}}>
-   <Link href="/leave/planing">
-   <div className="button section">
-      <i className="icon-check"></i> Leave Planner
-      </div>
-   </Link>
-    <Link href="/leave/requests">
-      <div className="button section">
-      <i className="lni lni-bolt"></i>  Leave Requests
-      </div>
-    </Link>
-      </div>
-    </div>
-    <Link href="/field/request">
-    <div className="button section">
-    <i className="lni lni-infinite"></i> Field Request
-    </div>
-  </Link>
-  <Link href="/retirement/management">
-      <div className="button section">
-      <i className="icon-clock"></i> Retirement Mgt
-      </div>
-    </Link>
-    <Link href="/staff/promotion">
-      <div className="button section">
-      <i className="lni lni-plus"></i> Promotion
-      </div>
-    </Link>
-    <Link href="/staff/reports">
-      <div className="button section">
-      <i className="lni lni-notepad"></i> Reports
-      </div>
-    </Link>
-
-   
-    <Link href="/field/request">
-    <div className="button section">
-    <i className="lni lni-infinite"></i> Field Activity
-    </div>
-  </Link> */}
-</>
-}
 
 
   </div>
