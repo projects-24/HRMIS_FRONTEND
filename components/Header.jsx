@@ -11,7 +11,7 @@ export default function Header({title , sub_title , sub_dir , sub_dir_route}) {
     <div className='margin-bottom-20'>
       <RowFlex alignItems='center'>
       <Link href="#" legacyBehavior>
-<Button rounded bg="light400" startIcon={<PiHouse />} smaller>
+<Button bold rounded bg="light400" startIcon={<PiHouse />} smaller>
 Home
 </Button>
 </Link>
@@ -20,7 +20,7 @@ Home
   <>
   <BreadCrumb type={"greater"} />
       <Link href={sub_dir_route} legacyBehavior>
-<Button rounded bg="light500" raised startIcon={<PiHouse />} smaller>
+<Button bold rounded bg="light500" raised startIcon={<PiHouse />} smaller>
 {sub_dir}
 </Button>
 </Link>
@@ -28,7 +28,7 @@ Home
 }
 <BreadCrumb type={"greater"} />
 <Link href="#" legacyBehavior>
-<Button rounded bg="gradient" raised startIcon={<PiCheck />} smaller>
+<Button bold rounded bg="gradient" raised startIcon={<PiCheck />} smaller>
 {title.slice(0 ,30)}
 </Button>
 </Link>
@@ -36,13 +36,16 @@ Home
     </div>
     <Text
     text={title}
-    lighter
     heading='h2'
+    bold
     block
     />
     <Text
     text={sub_title}
     article
+    bold 
+    color="dark700"
+    size="minified"
     />
 </p>
   )

@@ -9,7 +9,7 @@ import TableData from 'funuicss/ui/table/Data'
 import TableRow from 'funuicss/ui/table/Row'
 import Circle from 'funuicss/ui/specials/Circle'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
-import { PiCheck, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiTrash, PiX } from 'react-icons/pi'
+import { PiCheck, PiEye, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiTrash, PiX } from 'react-icons/pi'
 import ToolTip from 'funuicss/ui/tooltip/ToolTip'
 import Tip from 'funuicss/ui/tooltip/Tip'
 import Input from 'funuicss/ui/input/Input'
@@ -63,7 +63,7 @@ export default function LeaveRquest() {
     console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Staff" , "Email" ,  "Leave" , "Effective" , "Resume" , "Approval" ] , 
+      "titles" : ["Staff" , "Email" ,  "Leave" , "Effective" , "Resume" ,"View" , "Approve" ] , 
       "fields" : ["staffId" , "addedEmail" , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
@@ -338,6 +338,17 @@ customColumns={[
   {
     title: 'Actions',
     render: (data) => (
+      <Circle bg='dark' size={1.5} onClick={() => {
+        setselected_data(data)
+        setapproval_modal(true)
+      }}>
+      <PiEye />
+      </Circle>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
       <Circle bg='primary' size={1.5} onClick={() => {
         setselected_data(data)
         setapproval_modal(true)
@@ -345,7 +356,7 @@ customColumns={[
       <PiPen />
       </Circle>
     ),
-  },
+  }
 ]}
 />
      </div>

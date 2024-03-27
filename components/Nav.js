@@ -94,7 +94,8 @@ left = {
 right={
 <div className="">
 <DropDown side="right">
-<Button funcss={"myBtn"}  text={`${user.first_name} ${user.last_name}`} startIcon={<PiUser />} endIcon={<PiCaretDown />} />
+<Button funcss={"myBtn"}  text={`${user.first_name} ${user.last_name}`} startIcon={
+   <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUser /></div> } endIcon={<PiCaretDown />} />
 <DropMenu 
 animation="ScaleUp" 
 width="180px"
@@ -103,11 +104,11 @@ duration={0.2}>
 
 <Button
 text="Account"
-startIcon={<PiUser />}
+startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /></div> }
 />
 <Button
 text=" Password"
-startIcon={<PiKey />}
+startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiKey /> </div>}
 />
 
     <Hr />
@@ -115,7 +116,7 @@ startIcon={<PiKey />}
   <Button
   onClick={() => SignOut()}
 text="Sign Out"
-startIcon={<PiSignOut />}
+startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiSignOut /> </div>}
 /></DropItem>
 </DropMenu>
 </DropDown>
@@ -140,7 +141,7 @@ startIcon={<PiSignOut />}
     text="Dashboard"
     rounded
     fullWidth
-    startIcon={<PiGraph />}
+    startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
     />
     </Link>
 
@@ -151,7 +152,7 @@ startIcon={<PiSignOut />}
     text="Org Settings"
     rounded
     fullWidth
-    startIcon={<PiGear />}
+    startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
     />
     </Link>
   <Link href="/staff/profiling">
@@ -161,16 +162,16 @@ startIcon={<PiSignOut />}
     text="Staff Profiling"
     rounded
     fullWidth
-    startIcon={<PiUsers />}
+    startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div> }
     />
     </Link>
     <Button
   style={{marginTop:'1rem'}}
     funcss={`text-left flex-start text-bold text-minified ${active == '4' ? 'dark200 ' : ''}`}
-    text="Leave Management"
+    text="Leave Mng"
     rounded
     fullWidth
-    startIcon={<PiLeaf />}
+    startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
     onClick={() => {
       setdropdown(!dropdown)
     } }
@@ -187,7 +188,7 @@ startIcon={<PiSignOut />}
    text="Leave Request"
    rounded
    fullWidth
-   startIcon={<PiBriefcase />}
+   startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiBriefcase /> </div>}
    />
    </Link>
    <Link href="/leave/planing">
@@ -197,7 +198,7 @@ startIcon={<PiSignOut />}
    text="Leave Planing"
    rounded
    fullWidth
-   startIcon={<PiCards />}
+   startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiCards /> </div>}
    />
    </Link>
    <Link href="/leave/configuration">
@@ -207,7 +208,7 @@ startIcon={<PiSignOut />}
    text="Configuration"
    rounded
    fullWidth
-   startIcon={<PiGearLight />}
+   startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGearLight /> </div>}
    />
    </Link>
    </div>
@@ -217,12 +218,12 @@ startIcon={<PiSignOut />}
  <div className="margin-top-100 padding-top-20 ">
  <Button
   style={{marginTop:'1rem'}}
-  raised
-    bg="error"
+  funcss={`text-left flex-start text-bold text-minified`}
+  bold 
+  color="dark400"
     text="Sign Out"
-    rounded
     fullWidth
-    startIcon={<PiSignOut />}
+    startIcon={ <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiSignOut /> </div>}
     onClick={() => SignOut()}
     />
  </div>
