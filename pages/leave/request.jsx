@@ -44,8 +44,9 @@ export default function LeaveRquest() {
   const [token, settoken] = useState("")
   const [user, setuser] = useState(null)
   const [leaves, setleaves] = useState("")
-  const [approval_modal, setapproval_modal] = useState(false)
+  const [viewModal, setviewModal] = useState(false)
   const [selected_data, setselected_data] = useState("")
+  const [approval_modal, setapproval_modal] = useState(false)
 
   const [table_data, settable_data] = useState("")
   useEffect(() => {
@@ -155,7 +156,7 @@ console.log(doc)
      }
     })
     .catch(err => {
-      setmessage(JSON.stringify(err.message))
+      setmessage(JSON.stringify(err.response.data.message))
       setloading(false)
     })
     }
@@ -165,15 +166,63 @@ console.log(doc)
 
 }
 
+const Approve = (_id) => {
+  setloading(true)
+  setapproval_modal(false)
+  Axios.patch(endPoint + "/leaveapproval/" + _id)
+  .then((res) => {
+    setdocs("")
+    setsuccess(true)
+  }).catch(err => {
+    setmessage(JSON.stringify(err.response.data.message))
+    setloading(false)
+  })
+}
+
   return (
     <div>
+      <Nav active={4}/>
+  <Modal 
+   open={approval_modal}
+   maxWidth='500px'
+   animation='SlideDown'
+   flat
+   close={<PiX className='pointer hover-text-error' onClick={()=>setapproval_modal(false)} />}
+   title={
+<>
+<Text heading='h5' bold text={selected_data.addedEmail} block/>
+ <Text bold text={selected_data.leaveTypeName} size='small' color="primary"/>
+</>
+ }
 
+body={
+<Text text='Do you want to approve the leave for the above staff ☝' />
+}
+footer={
+  <RowFlex gap={1} justify='flex-end'>
+<Button 
+text='No'
+bg='dark300'
+endIcon={<PiX />}
+bold 
+onClick={()=>setapproval_modal(false)}
+/>
+<Button 
+text='Yes'
+bg='primary'
+endIcon={<PiCheck />}
+bold 
+onClick={() => Approve(selected_data.staffId)}
+/>
+  </RowFlex>
+}
+/>
     <Modal 
-    open={approval_modal}
+    open={viewModal}
     maxWidth='1000px'
     animation='SlideDown'
     flat
-    close={<PiX className='pointer hover-text-error' onClick={()=>setapproval_modal(false)} />}
+    close={<PiX className='pointer hover-text-error' onClick={()=>setviewModal(false)} />}
     title={
 <>
 <Text heading='h5' bold text={selected_data.addedEmail} block/>
@@ -236,7 +285,7 @@ console.log(doc)
       }
          {
     message &&  <div>
-    <Alert fixed='top-middle' type='warning' funcss='raised'  message={message}/>
+    <Alert fixed='top-middle' type='warning' standard funcss='raised'  message={message}/>
   </div>
 }
       {
@@ -250,7 +299,6 @@ console.log(doc)
       <DeleteModal />
       }
 
-      <Nav active={2}/>
       <div className="content">
     <Modal
     open={add_data_modal}
@@ -340,7 +388,7 @@ customColumns={[
     render: (data) => (
       <Circle bg='dark' size={1.5} onClick={() => {
         setselected_data(data)
-        setapproval_modal(true)
+        setviewModal(true)
       }}>
       <PiEye />
       </Circle>
@@ -353,7 +401,7 @@ customColumns={[
         setselected_data(data)
         setapproval_modal(true)
       }}>
-      <PiPen />
+      <PiCheck />
       </Circle>
     ),
   }

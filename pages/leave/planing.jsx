@@ -156,7 +156,7 @@ const Submit = () => {
       <DeleteModal />
       }
 
-      <Nav active={2}/>
+      <Nav active={4}/>
       <div className="content">
        {
         add_data_modal ?

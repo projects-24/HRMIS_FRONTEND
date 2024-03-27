@@ -3425,10 +3425,10 @@ functions-have-names@^1.2.2:
   resolved "https://registry.npmjs.org/functions-have-names/-/functions-have-names-1.2.3.tgz"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-funuicss@^2.0.8:
-  version "2.0.9"
-  resolved "https://registry.npmjs.org/funuicss/-/funuicss-2.0.9.tgz"
-  integrity sha512-Y/pllcrhExwkBKmK4RAEjjn02tNEbRbAJVCbbK9TD1kpXsFNKSiYeWZZgsbqVSO07ju+bzOtZKfa+EuDqHPHSg==
+funuicss@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.npmjs.org/funuicss/-/funuicss-2.0.10.tgz"
+  integrity sha512-02hzg3p4IdfU4qsAkE3nLI+mvIkk3q9zAI/TyQNMQs1n9tGux2S+OrdSm8CnKOvyBSlFXYCEe5QGZqZeHbeXlw==
   dependencies:
     aos "^2.3.4"
     next "^13.3.1"
