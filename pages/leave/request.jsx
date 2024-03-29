@@ -5,18 +5,15 @@ import Nav from '../../components/Nav'
 import Header from '../../components/Header'
 import Card from 'funuicss/ui/card/Card'
 import Table from 'funuicss/ui/table/Table'
-import TableData from 'funuicss/ui/table/Data'
-import TableRow from 'funuicss/ui/table/Row'
 import Circle from 'funuicss/ui/specials/Circle'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
-import { PiCheck, PiEye, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiTrash, PiX } from 'react-icons/pi'
+import { PiCheck, PiChecks, PiEye, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiSpinner, PiTrash, PiX } from 'react-icons/pi'
 import ToolTip from 'funuicss/ui/tooltip/ToolTip'
 import Tip from 'funuicss/ui/tooltip/Tip'
 import Input from 'funuicss/ui/input/Input'
 import Button from 'funuicss/ui/button/Button'
 import Modal from 'funuicss/ui/modal/Modal'
 import Text from 'funuicss/ui/text/Text'
-import MyModal from '../../components/Modal'
 import CloseModal from 'funuicss/ui/modal/Close'
 import {FunGet} from "funuicss/js/Fun"
 import Loader from '../../components/loader'
@@ -30,7 +27,9 @@ import StepContainer from 'funuicss/ui/step/Container'
 import Step from 'funuicss/ui/step/Step'
 import StepHeader from 'funuicss/ui/step/Header'
 import StepLine from 'funuicss/ui/step/Line'
-
+import Grid from "funuicss/ui/grid/Grid"
+import Col from "funuicss/ui/grid/Col"
+import Section from "funuicss/ui/specials/Section"
 export default function LeaveRquest() {
    const [loading, setloading] = useState(false)
   const [add_data_modal, setadd_data_modal] = useState(false)
@@ -59,16 +58,17 @@ export default function LeaveRquest() {
 
   useEffect(() => {
  if(!table_data && token){
+  setloading(true)
   GetRequest("/leaverequest")
   .then( res => {
     console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Staff" , "Email" ,  "Leave" , "Effective" , "Resume" ,"View" , "Approve" ] , 
-      "fields" : ["staffId" , "addedEmail" , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
+      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume" ,"View" ,"Secion approval" , "Hr Approval" , "GS Approval" , "Approve" ] , 
+      "fields" : ["staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
-    // setdocs(data)
+    setloading(false)
   })
   .catch(err => console.log(err))
  }
@@ -91,12 +91,6 @@ export default function LeaveRquest() {
     }, 4000)
 },[message , success])
 
-const OpenModal = () => {
- setadd_data_modal(true)
-}
-const Close_Modal = () => {
- setadd_data_modal(false)
-}
 
 const Submit = () => {
   const requested_days = FunGet.val("#requested_days")
@@ -239,7 +233,7 @@ onClick={() => Approve(selected_data.staffId)}
 </Circle>
 <div>
 <Text text={"GS Approval"} heading="h5"/>
-<br />
+<div />
 <Text text={"Approval by the Gs"} size="small" color={"dark200"} bold/>
 </div>
     </RowFlex>
@@ -254,7 +248,7 @@ onClick={() => Approve(selected_data.staffId)}
 </Circle>
 <div>
 <Text text={"Hr Approval"} heading="h5"/>
-<br />
+<div />
 <Text text={"Approval by the Human Resource"} size="small" color={"dark200"} bold/>
 </div>
     </RowFlex>
@@ -269,7 +263,7 @@ onClick={() => Approve(selected_data.staffId)}
 </Circle>
 <div>
 <Text text={"Sectional Head Approval"} heading="h5"/>
-<br />
+<div />
 <Text text={"Approval by the Sectional Head"} size="small" color={"dark200"} bold/>
 </div>
     </RowFlex>
@@ -277,6 +271,38 @@ onClick={() => Approve(selected_data.staffId)}
 </Step>
 
 </StepContainer>
+<Section gap={2} funcss='bb'/>
+<div>
+  <Grid>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Staff Id" block/>
+      <Text size='minified'  text={selected_data.staffId} block/>
+    </Col>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Email" block/>
+      <Text size='minified'  text={selected_data.addedEmail} block/>
+    </Col>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Leave Address" block/>
+      <Text size='minified'  text={selected_data.leaveAddress} block/>
+    </Col>
+    </Grid>
+    <Section gap={1} funcss='bb'/>
+    <Grid>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Max number of Days" block/>
+      <Text size='minified'  text={selected_data.maximumNumberDays} block/>
+    </Col>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Days Remaining" block/>
+      <Text size='minified'  text={selected_data.numberOfDaysRemaining} block/>
+    </Col>
+    <Col sm={6} md={4} lg={4} funcss='padding'>
+      <Text size='small' bold color="primary" text="Requested days" block/>
+      <Text size='minified'  text={selected_data.requestedDays} block/>
+    </Col>
+  </Grid>
+</div>
     </>}
     />
       {
@@ -285,7 +311,7 @@ onClick={() => Approve(selected_data.staffId)}
       }
          {
     message &&  <div>
-    <Alert fixed='top-middle' type='warning' standard funcss='raised'  message={message}/>
+    <Alert fixed='top-right' animation='SlideLeft' type='warning' standard funcss='raised'  message={message}/>
   </div>
 }
       {
@@ -359,7 +385,7 @@ onClick={() => Approve(selected_data.staffId)}
 
         <Header sub_dir={"Configurations" } sub_dir_route={"/configurations"} title={ "Leave Request"} sub_title={"Request for a leave"}/>
  
-        <div className='_card'>
+        <div className='_card no-padding'>
        <div className="padding text-right">
        <Button 
    fillAnimation 
@@ -378,11 +404,41 @@ onClick={() => Approve(selected_data.staffId)}
        {
 
 table_data  && 
-<div style={{overflowX:"auto"}}>
+<div >
 <Table
 data={table_data}
 pageSize={10}
 customColumns={[
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
+      data.sectionalHeadApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
+      data.hrApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
+      data.gsApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+    ),
+  },
   {
     title: 'Actions',
     render: (data) => (

@@ -7,6 +7,7 @@ import { GetRequest, GetToken } from '../components/Functions';
 import Text from 'funuicss/ui/text/Text';
 import Header from '../components/Header';
 const _Bar = dynamic(() => import("./../components/Chart/_Bar"), { ssr: false })
+const _LineGraph = dynamic(() => import("./../components/Chart/_Line"), { ssr: false })
 export default function Dashboard() {
   const [user, setuser] = useState("")
   const [data, setdata] = useState("")
@@ -23,7 +24,10 @@ export default function Dashboard() {
   useEffect(() => {
     if (!data) {
       GetRequest("/dashboard")
-        .then(res => setdata(res))
+        .then(res => {
+          setdata(res)
+          console.log(res[0])
+        })
         .catch(err => console.log(err))
     }
   })
@@ -55,7 +59,7 @@ export default function Dashboard() {
                             All staffs
                           </div>
                           <div className="h2">
-                            {data && data[0].number}
+                            {data && data[0].number }
                           </div>
                         </div>
                       </div>
@@ -103,24 +107,26 @@ export default function Dashboard() {
                             data && <_Bar data={[
                               {
                                 "name": "All Staffs",
-                                "number": 9
+                                "number": parseInt(data[0].number)
                               },
                               {
                                 "name": "At Post",
-                                "number": 9
+                                "number": parseInt(data[1].number)
                               },
                               {
                                 "name": "On Leave",
-                                "number": 0
+                                "number": parseInt(data[2].number)
                               },
                               {
                                 "name": "On Field",
-                                "number": 0
+                                "number":  parseInt(data[3].number)
                               }
                             ]} />
+                           
                           }
                         </div>
                       </div>
+                   
 
                     </div>
                   </>
