@@ -136,9 +136,9 @@ export default function Profiling() {
             <div className="row-flex fit space-between m-section">
 
               {
-                // user.department === "Human Resource" ?
+                user.directorate_id === 2 ?
                 <Link href="/form/personal">
-                  <button className="button raised gradient text-white width-200-min roundEdge"
+                  <button className="button raised primary text-bold text-white width-200-min roundEdge"
                     style={{
                       position: "fixed",
                       bottom: "10px",
@@ -148,7 +148,7 @@ export default function Profiling() {
                     <i className="lni lni-user"></i> New Staff
                   </button>
                 </Link>
-                //  :""
+                 :""
               }
             </div>
 

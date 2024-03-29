@@ -17,9 +17,7 @@ import DropItem from 'funuicss/ui/drop/Item'
 import DropMenu from 'funuicss/ui/drop/Menu'
 
 const Nav = ({ noSideBar, active }) => {
-  const [dropdown, setdropdown] = useState(false)
   const [user, setuser] = useState("")
-  const [dropDown, setdropDown] = useState(false)
   const [token, settoken] = useState("")
 
   const [drop1, setdrop1] = useState(false);
@@ -98,21 +96,22 @@ const Nav = ({ noSideBar, active }) => {
                   width="180px"
                   hoverable="hoverable"
                   duration={0.2}>
-
-                  <Button
+                    <Link href={"/user/account"}>
+                    <Button
                     text="Account"
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /></div>}
+                    startIcon={<div><PiUser /></div>}
                   />
+                    </Link>
                   <Button
                     text=" Password"
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiKey /> </div>}
+                    startIcon={<div> <PiKey /> </div>}
                   />
 
                   <Hr />
                   <Button
                     onClick={() => SignOut()}
                     text="Sign Out"
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiSignOut /> </div>}
+                    startIcon={<div > <PiSignOut /> </div>}
                   />
                 </DropMenu>
               </DropDown>
@@ -131,16 +130,29 @@ const Nav = ({ noSideBar, active }) => {
 
               <div className="">
 
-                <Link href="/dashboard"> 
+                <Link href="/user/account"> 
                   <Button
-                    funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'dark200 ' : ''}`}
-                    text="Dashboard"
+                    funcss={`text-left flex-start padding-5 text-minified ${active == '6' ? 'dark200 ' : ''}`}
+                    text="Profile"
                     rounded
                     fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
+                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /> </div>}
                   />
                 </Link>
-
+              {  user.position_id != 5 &&
+                   <Link href="/dashboard"> 
+                   <Button
+                         style={{ marginTop: '1rem' }}
+                     funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'dark200 ' : ''}`}
+                     text="Dashboard"
+                     rounded
+                     fullWidth
+                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
+                   />
+                 </Link>
+              }
+     {   
+                        user.directorate_id == 2 &&
                 <Link href="/configurations">
                   <Button
                     style={{ marginTop: '1rem' }}
@@ -151,21 +163,25 @@ const Nav = ({ noSideBar, active }) => {
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
                   />
                 </Link>
+  }
+              {
+                user.position_id != 5 && 
                 <Link href="/staff/profiling">
-                  <Button
-                    style={{ marginTop: '1rem' }}
-                    funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'dark200 ' : ''}`}
-                    text="Staff Profiling"
-                    rounded
-                    fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
-                  />
-                </Link>
+                <Button
+                  style={{ marginTop: '1rem' }}
+                  funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'dark200 ' : ''}`}
+                  text="Staff Profiling"
+                  rounded
+                  fullWidth
+                  startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
+                />
+              </Link>
+              }
                 <DropDown funcss="no-padding ">
                   <Button
                     style={{ marginTop: '1rem' }}
                     funcss={`text-left flex-start padding-5 text-minified ${active == '4' ? 'dark200 ' : ''}`}
-                    text="Leave Mng"
+                    text="Leave Mgt"
                     rounded
                     fullWidth
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
@@ -194,7 +210,9 @@ const Nav = ({ noSideBar, active }) => {
                           startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiBriefcase /> </div>}
                         />
                       </Link>
-                      <Link href="/leave/configuration">
+                      {
+                        user.directorate_id == 2 &&
+                        <Link href="/leave/configuration">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
                           text="Configuration"
@@ -203,6 +221,8 @@ const Nav = ({ noSideBar, active }) => {
                           startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGearLight /> </div>}
                         />
                       </Link>
+                      }
+                 
 
 
 

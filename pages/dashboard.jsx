@@ -34,7 +34,7 @@ export default function Dashboard() {
 
 
 
-  if (user) {
+  if (user && user.position_id != 5) {
     return (
       <div className="">
         <div className='content'>

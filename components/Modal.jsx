@@ -6,8 +6,9 @@ export default function MyModal({title , sub_title , body, maxwidth ,footer ,clo
   return (
     <Modal
     open={true}
-    maxWidth={maxwidth ? maxwidth : '500px'}
+    maxWidth={maxwidth ? maxwidth : '600px'}
     animation='SlideDown'
+    flat
     duration={0.2}
     title={<>
     <Text text={title ? title : ''} light heading='h4' block/>

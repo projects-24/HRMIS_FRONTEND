@@ -202,7 +202,8 @@ const Submit = () => {
        funcss='text-small'
        hoverable
        head={<>
-         <TableData>job</TableData>
+         <TableData>Id</TableData>
+         <TableData>Job</TableData>
          <TableData>Salary Level</TableData>
          <TableData>Modify</TableData>
          <TableData>Delete</TableData>
@@ -223,6 +224,7 @@ const Submit = () => {
               })
               .map(res => (
                 <TableRow key={res.id}>
+                <TableData>{res.id}</TableData>
                 <TableData>{res.job}</TableData>
                 <TableData>{res.salaryLevel}</TableData>
                 <TableData>

@@ -199,7 +199,6 @@ const Submit = () => {
     OpenModal()
    }}
    outlined 
-   disabled
    outlineSize={0.1}
    fillTextColor='dark900' 
     bg="primary" 
@@ -213,7 +212,8 @@ const Submit = () => {
        funcss='text-small'
        hoverable
        head={<>
-         <TableData>section</TableData>
+         <TableData>Id</TableData>
+         <TableData>Section</TableData>
          <TableData>Directorate</TableData>
          <TableData>Modify</TableData>
          <TableData>Delete</TableData>
@@ -224,6 +224,7 @@ const Submit = () => {
               docs &&
               docs.map(res => (
                 <TableRow key={res.id}>
+                <TableData>{res.id}</TableData>
                 <TableData>{res.section}</TableData>
                 <TableData>{res.directorate}</TableData>
                 <TableData>

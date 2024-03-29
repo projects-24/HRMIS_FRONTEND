@@ -178,7 +178,6 @@ const Submit = () => {
     OpenModal()
    }}
    outlined 
-   disabled
    outlineSize={0.1}
    fillTextColor='dark900' 
     bg="primary" 
@@ -192,6 +191,7 @@ const Submit = () => {
        funcss='text-small'
        hoverable
        head={<>
+         <TableData>Id</TableData>
          <TableData>position</TableData>
          <TableData>Modify</TableData>
          <TableData>Delete</TableData>
@@ -211,6 +211,7 @@ const Submit = () => {
                 }
               }).map(res => (
                 <TableRow key={res.id}>
+                <TableData>{res.id}</TableData>
                 <TableData>{res.position}</TableData>
                 <TableData>
                 <ToolTip>
