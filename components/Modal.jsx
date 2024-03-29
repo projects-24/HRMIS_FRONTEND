@@ -2,12 +2,12 @@ import React from 'react'
 import Modal from 'funuicss/ui/modal/Modal'
 import Text from 'funuicss/ui/text/Text'
 import { PiX } from 'react-icons/pi'
-export default function MyModal({title , sub_title , body, maxwidth ,footer ,close}) {
+export default function MyModal({title , sub_title , body, maxwidth ,footer ,close , ...rest}) {
   return (
     <Modal
     open={true}
     maxWidth={maxwidth ? maxwidth : '500px'}
-    animation='ScaleUp'
+    animation='SlideDown'
     duration={0.2}
     title={<>
     <Text text={title ? title : ''} light heading='h4' block/>
@@ -15,7 +15,8 @@ export default function MyModal({title , sub_title , body, maxwidth ,footer ,clo
     </>}
     body={body}
     footer={footer ? footer : ''}
-    close={close}
+    close={close} 
+    {...rest}
     />
   )
 }

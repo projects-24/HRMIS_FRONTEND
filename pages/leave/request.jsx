@@ -64,7 +64,7 @@ export default function LeaveRquest() {
     console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume" ,"View" ,"Secion approval" , "Hr Approval" , "GS Approval" , "Approve" ] , 
+      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Secion approval" , "Hr Approval" ,"GS Approval"  , "View" , "Approve" ] , 
       "fields" : ["staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)

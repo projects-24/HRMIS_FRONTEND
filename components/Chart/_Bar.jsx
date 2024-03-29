@@ -12,7 +12,7 @@ const _Bar = ({data}) => {
     yField: 'name',
     seriesField: 'name',
     color: ({ name }) => {
-      return name === 'At Post' ? '#FAAD14' : '#5B8FF9';
+      return name === 'At Post' ? '#FAAD14' : '#818cf8';
     },
     legend: false,
     meta: {

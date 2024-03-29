@@ -74,9 +74,7 @@ export default function LeavePlaning() {
     }, 4000)
 },[message , success])
 
-const OpenModal = () => {
- setadd_data_modal(true)
-}
+
 const Close_Modal = () => {
  setadd_data_modal(false)
 }
@@ -142,7 +140,7 @@ const Submit = () => {
       }
          {
     message &&  <div>
-    <Alert fixed='top-middle' type='warning' funcss='raised'  message={message}/>
+    <Alert standard fixed='top-right' type='warning' animation='SlideLeft' funcss='raised'  message={message}/>
   </div>
 }
       {
@@ -161,6 +159,8 @@ const Submit = () => {
        {
         add_data_modal ?
         <MyModal
+        flat 
+        maxwidth={"600px"}
         close={
           <CloseModal onClick={Close_Modal} />
         }
@@ -199,9 +199,9 @@ const Submit = () => {
              <Button
      text='Submit Data'
      startIcon={<PiPaperPlane />}
-     bg='primary800'
+     bg='primary'
      raised
-     rounded
+     bold
      onClick={Submit}
      />
         </RowFlex>}
@@ -229,10 +229,9 @@ const Submit = () => {
    fillAnimation 
    onClick={() => {
     setupdate_doc("")
-    OpenModal()
+    setadd_data_modal(true)
    }}
    outlined 
-   disabled
    outlineSize={0.1}
    fillTextColor='dark900' 
     bg="primary" 
@@ -273,27 +272,9 @@ const Submit = () => {
                 <TableData>{FormatDate(res.proposedEndDate).date}</TableData>
                 <TableData>{res.addedEmail.slice(0, res.addedEmail.indexOf("@"))}</TableData>
                 <TableData>{FormatDate(res.createdAt).date}</TableData>
-                {/* <TableData>
-                <ToolTip>
-                 <span  onClick={() => {
-              new Promise((resolve, reject) => {
-               setupdate_doc({title:res.leaveplanName, leaveplanName:res.leaveplanName , id:res.id , maximumNumberDays:res.maximumNumberDays ,leaveDescription:res.leaveDescription })
-               resolve()
-              })
-              .then(() => setadd_data_modal(true))
-               
-                } }> 
-                <Circle size={2} funcss='raised' bg='success'>
-                   <PiPen />
-                 </Circle>
-                 </span>
-       <Tip funcss='z-index-5' tip="right"  animation="ScaleUp" duration={0.2} content="Edit Object"/>
-       </ToolTip>
-             
-                </TableData> */}
                 <TableData>
                 <ToolTip>
-                <span onClick={() => setdeleteId(res.id) }>
+                <span onClick={() => setdeleteId(res.leaveId) }>
                 <Circle size={2} funcss='raised' bg='error'>
                    <PiTrash />
                  </Circle>

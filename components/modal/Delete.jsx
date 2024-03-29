@@ -42,29 +42,32 @@ export default function DeleteModal({route , id}) {
         loading &&  <Loader />
     }
      <Modal
+     flat 
+     position='left'
+     animation='SlideRight'
     open={loading ? false : true}
-    maxWidth='400px'
-    
+    maxWidth='600px'
     body={
         <RowFlex gap={1}>
-        <Circle size={2} bg='error'>
+        <Circle size={2.5} bg='error'>
             <PiTrash />
         </Circle>
-        <div>
-        <Text text='Delete Object' heading='h4' />
-        <Text  text='This will delete the object completely from the database' block/>
+        <div className='bl padding'>
+        <Text text='Delete Object' heading='h4' bold color='dark300' />
+        <Text size='minified' color="dark200" text='This will delete the object completely from the database' block/>
         </div>
     
         </RowFlex>
     }
     footer={
-        <RowFlex gap={1} justify='flex-end'>
+        <RowFlex gap={1} justify='flex-end' >
             <Button
             text='Cancel'
             small
             raised
             bg='primary'
             onClick={() => window.location.reload()}
+            bold
             />
             <Button
             text='Delete'
@@ -73,6 +76,7 @@ export default function DeleteModal({route , id}) {
             startIcon={<PiTrash />}
             bg='error'
             onClick={Submit}
+            bold
             />
 
     </RowFlex>
