@@ -161,7 +161,7 @@ const Nav = ({ noSideBar, active }) => {
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
                   />
                 </Link>
-                <DropDown funcss="no-padding">
+                <DropDown funcss="no-padding ">
                   <Button
                     style={{ marginTop: '1rem' }}
                     funcss={`text-left flex-start padding-5 text-minified ${active == '4' ? 'dark200 ' : ''}`}
@@ -169,16 +169,13 @@ const Nav = ({ noSideBar, active }) => {
                     rounded
                     fullWidth
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
-                    onClick={() => {
-                      setdropdown(!dropdown)
-                    }}
                   />
                   <DropMenu
                   width="200px"
                     animation="ScaleUp"
                     hoverable="hoverable"
+                    funcss="padding"
                     duration={0.2}>
-                    <DropItem>
                       <Link href="/leave/planing">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
@@ -188,8 +185,6 @@ const Nav = ({ noSideBar, active }) => {
                           startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiCards /> </div>}
                         />
                       </Link>
-                    </DropItem>
-                    <DropItem>
                       <Link href="/leave/request">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
@@ -199,8 +194,6 @@ const Nav = ({ noSideBar, active }) => {
                           startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiBriefcase /> </div>}
                         />
                       </Link>
-                    </DropItem>
-                    <DropItem>
                       <Link href="/leave/configuration">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
@@ -210,7 +203,6 @@ const Nav = ({ noSideBar, active }) => {
                           startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGearLight /> </div>}
                         />
                       </Link>
-                    </DropItem>
 
 
 
@@ -228,7 +220,7 @@ const Nav = ({ noSideBar, active }) => {
                     color="dark400"
                     text="Sign Out"
                     fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiSignOut /> </div>}
+                    startIcon={<div className="text-error width-30 height-30 padding-5 roundEdgeSmall central"> <PiSignOut /> </div>}
                     onClick={() => SignOut()}
                   />
                 </div>

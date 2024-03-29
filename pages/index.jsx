@@ -139,13 +139,13 @@ export default function Home() {
                 <IconicInput
                   funcss="section full-width"
                   leftIcon={<PiPaperPlaneRight />}
-                  input={<Input rounded id='email' type="email" label="Email" funcss="full-width" bordered />}
+                  input={<Input rounded id='email' type="email" label="Email" funcss="text-minified" fullWidth bordered />}
                 />
                 <p />
                 <IconicInput
                   funcss="section full-width"
                   leftIcon={<PiKey />}
-                  input={<Input rounded id='password' type="password" label="Password" funcss="full-width" bordered />}
+                  input={<Input rounded id='password' type="password" label="Password" funcss="text-minified" fullWidth bordered />}
                 />
               </div>
               {
