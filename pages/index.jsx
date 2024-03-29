@@ -62,7 +62,7 @@ export default function Home() {
               .then(() => {
                 setsuccess(true)
                 setTimeout(() => {
-                  window.location.assign("/dashboard")
+                  window.location.assign(doc.data.staff.position_id == 5 ? "/user/account" : "/dashboard")
                 }, 2000);
               })
           }).catch(err => {
