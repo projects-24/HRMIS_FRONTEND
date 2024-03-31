@@ -54,8 +54,8 @@ export default function LeaveRquest() {
     console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" ,"GS" , "Director"  , "View" , "Approve" ] , 
-      "fields" : ["staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
+      "titles" : ["Full Name" ,"Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" ,"GS" , "Director"  , "Status" , "View" , "Approve" ] , 
+      "fields" : ["fullName" , "staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
     setloading(false)
@@ -180,7 +180,7 @@ const Approve = (_id) => {
    close={<PiX className='pointer hover-text-error' onClick={()=>setapproval_modal(false)} />}
    title={
 <>
-<Text heading='h5' bold text={selected_data.addedEmail} block/>
+<Text heading='h5' bold text={selected_data.fullName} block/>
  <Text bold text={selected_data.leaveTypeName} size='small' color="primary"/>
 </>
  }
@@ -208,11 +208,15 @@ onClick={() => Approve(selected_data.leaveRequestId)}
 }
 />
 {/* view request modal */}
-   <ViewRequest
-    open={viewModal} 
-    selected_data={selected_data} 
-    close={<PiX className='pointer hover-text-error' onClick={()=>setviewModal(false)} />}
-    />
+{
+  user && 
+  <ViewRequest
+  current_user={user}
+   open={viewModal} 
+   selected_data={selected_data} 
+   close={<PiX className='pointer hover-text-error' onClick={()=>setviewModal(false)} />}
+   />
+}
 
       {
         deleteId &&
@@ -269,9 +273,21 @@ customColumns={[
   {
     title: 'Actions',
     render: (data) => (
+      user.position_id === 1 || user.position_id === 2 || user.position_id === 3 ?
    <div>
     {
       data.gsApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+   : <></>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
+      data.directorApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
     }
    </div>
     ),
@@ -281,7 +297,7 @@ customColumns={[
     render: (data) => (
    <div>
     {
-      data.directorApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+      data.leaveStatus ? <PiChecks className='success' size={15} /> : <PiX size={15} className='error' />
     }
    </div>
     ),

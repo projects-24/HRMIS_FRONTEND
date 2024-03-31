@@ -30,6 +30,7 @@ import StepLine from 'funuicss/ui/step/Line'
 import Grid from "funuicss/ui/grid/Grid"
 import Col from "funuicss/ui/grid/Col"
 import Section from "funuicss/ui/specials/Section"
+import ViewRequest from '../../components/modal/ViewRequest'
 export default function MyLeaveRquest() {
    const [loading, setloading] = useState(false)
   const [add_data_modal, setadd_data_modal] = useState(false)
@@ -63,7 +64,7 @@ export default function MyLeaveRquest() {
   .then( res => {
     let data = {
       "data" : res , 
-      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" , "Director","GS"  , "View" , "Delete"  ] , 
+      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" , "Director",  user.position_id === 1 || user.position_id === 2 || user.position_id === 3 ? "GS" : "" , "Status", "View" , "Delete"  ] , 
       "fields" : ["staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
@@ -197,100 +198,11 @@ onClick={() => Approve(selected_data.leaveRequestId)}
   </RowFlex>
 }
 />
-    <Modal 
-    open={viewModal}
-    maxWidth='1000px'
-    animation='SlideDown'
-    flat
-    close={<PiX className='pointer hover-text-error' onClick={()=>setviewModal(false)} />}
-    title={
-<>
-<Text heading='h5' bold text={selected_data.addedEmail} block/>
-  <Text bold text={selected_data.leaveTypeName} size='small' color="primary"/>
-</>
-  }
-    body={<>
-<StepContainer responsiveMedium  >
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.gsApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.gsApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"GS Approval"} heading="h5"/>
-<div />
-<Text text={"Approval by the Gs"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
-<StepLine />
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.hrApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.hrApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"Hr Approval"} heading="h5"/>
-<div />
-<Text text={"Approval by the Human Resource"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
-<StepLine />
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.sectionalHeadApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.sectionalHeadApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"Sectional Head Approval"} heading="h5"/>
-<div />
-<Text text={"Approval by the Sectional Head"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
+{
+  user && 
+<ViewRequest current_user = {user} selected_data={selected_data} open={viewModal} close={<PiX className='pointer hover-text-error' onClick={()=>setviewModal(false)} />}/>
 
-</StepContainer>
-<Section gap={2} funcss='bb'/>
-<div>
-  <Grid>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Staff Id" block/>
-      <Text size='minified'  text={selected_data.staffId} block/>
-    </Col>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Email" block/>
-      <Text size='minified'  text={selected_data.addedEmail} block/>
-    </Col>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Leave Address" block/>
-      <Text size='minified'  text={selected_data.leaveAddress} block/>
-    </Col>
-    </Grid>
-    <Section gap={1} funcss='bb'/>
-    <Grid>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Max number of Days" block/>
-      <Text size='minified'  text={selected_data.maximumNumberDays} block/>
-    </Col>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Days Remaining" block/>
-      <Text size='minified'  text={selected_data.numberOfDaysRemaining} block/>
-    </Col>
-    <Col sm={6} md={4} lg={4} funcss='padding'>
-      <Text size='small' bold color="primary" text="Requested days" block/>
-      <Text size='minified'  text={selected_data.requestedDays} block/>
-    </Col>
-  </Grid>
-</div>
-    </>}
-    />
+}
       {
         deleteId &&
         <DeleteModal  route={"/leavetype"} id={deleteId}/>
@@ -428,9 +340,21 @@ customColumns={[
   {
     title: 'Actions',
     render: (data) => (
+      user.position_id === 1 || user.position_id === 2 || user.position_id === 3 ?
    <div>
     {
       data.gsApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+   : <></>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
+      data.leaveStatus ? <PiChecks className='success' size={15} /> : <PiX size={15} className='error' />
     }
    </div>
     ),
@@ -445,7 +369,8 @@ customColumns={[
       <PiEye />
       </Circle>
     ),
-  },
+  }, 
+
   {
     title: 'Actions',
     render: (data) => (

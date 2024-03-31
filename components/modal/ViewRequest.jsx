@@ -13,7 +13,7 @@ import { PiX } from 'react-icons/pi'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
 import Circle from 'funuicss/ui/specials/Circle'
 
-export default function ViewRequest({selected_data , open , close}) {
+export default function ViewRequest({selected_data , open , close , current_user}) {
   return (
     <Modal 
     open={open}
@@ -29,21 +29,7 @@ export default function ViewRequest({selected_data , open , close}) {
   }
     body={<>
 <StepContainer responsiveMedium  >
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.gsApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.gsApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"GS"} heading="h5"/>
-<div />
-<Text text={"Approval"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
-<StepLine />
+
 <Step>
 <StepHeader>
     <RowFlex gap={1}>
@@ -74,6 +60,28 @@ export default function ViewRequest({selected_data , open , close}) {
 </StepHeader>
 </Step>
 <StepLine />
+
+{
+     current_user.position_id === 1 || current_user.position_id === 2 || current_user.position_id === 3 ? 
+     <>
+     <Step>
+<StepHeader>
+    <RowFlex gap={1}>
+    <Circle bg={selected_data.gsApproval ? "success" : "error"} size={2} funcss="raised">
+    {selected_data.gsApproval ? <PiCheck /> : <PiX />}
+</Circle>
+<div>
+<Text text={"GS"} heading="h5"/>
+<div />
+<Text text={"Approval"} size="small" color={"dark200"} bold/>
+</div>
+    </RowFlex>
+</StepHeader>
+</Step>
+<StepLine />
+     </>
+     : <></>
+}
 <Step>
 <StepHeader>
     <RowFlex gap={1}>
