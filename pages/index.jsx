@@ -58,7 +58,9 @@ export default function Home() {
         Axios.post(endPoint + "/login", { email: email, password: password })
           .then(doc => {
             setloader(false)
-            SaveToken(doc.data.staff, doc.data.token)
+            let staffData = doc.data.staff 
+            // staffData.retirement_date = doc.data.
+            SaveToken(staffData, doc.data.token)
               .then(() => {
                 setsuccess(true)
                 setTimeout(() => {
@@ -66,7 +68,7 @@ export default function Home() {
                 }, 2000);
               })
           }).catch(err => {
-            if (err.message === "Request failed with status code 422") {
+            if (err.message === "Request failed with status code 422") {W
               setmessage("Wrong credentials")
               setloader(false)
             } else {
@@ -124,7 +126,7 @@ export default function Home() {
                   <Text text={"API Status"} bold color='dark300' size='small' />
                   {
                     api_online ?
-                      <Circle size={1.3} bg='success' >
+                      <Circle size={1.3} bg='success' funcss='padding-5' >
                         <PiCheck />
                       </Circle>
                       :
@@ -150,7 +152,7 @@ export default function Home() {
               </div>
               {
                 message && <div>
-                  <Alert type='warning' standard fixed='top-right' message={message} />
+                  <Alert type='warning' animation='SlideLeft' standard fixed='top-right' message={message} />
                 </div>
               }
 

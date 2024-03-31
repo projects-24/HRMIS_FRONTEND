@@ -8,13 +8,14 @@ import Button from 'funuicss/ui/button/Button'
 import AppBar from 'funuicss/ui/appbar/AppBar'
 import Text from 'funuicss/ui/text/Text'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
-import { PiBriefcase, PiCards, PiCaretDown, PiGear, PiGearLight, PiGraph, PiKey, PiLeaf, PiSignOut, PiUser, PiUserCircle, PiUsers } from "react-icons/pi";
+import { PiBriefcase, PiCards, PiCaretDown, PiGear, PiGearLight, PiGraph, PiKey, PiLeaf, PiPaperPlane, PiSignOut, PiUser, PiUserCircle, PiUsers } from "react-icons/pi";
 import { GetToken, SignOut } from "./Functions"
 
 import Hr from 'funuicss/ui/specials/Hr'
 import DropDown from 'funuicss/ui/drop/Down'
 import DropItem from 'funuicss/ui/drop/Item'
 import DropMenu from 'funuicss/ui/drop/Menu'
+import Section from "funuicss/ui/specials/Section";
 
 const Nav = ({ noSideBar, active }) => {
   const [user, setuser] = useState("")
@@ -96,12 +97,12 @@ const Nav = ({ noSideBar, active }) => {
                   width="180px"
                   hoverable="hoverable"
                   duration={0.2}>
-                    <Link href={"/user/account"}>
+                  <Link href={"/user/account"}>
                     <Button
-                    text="Account"
-                    startIcon={<div><PiUser /></div>}
-                  />
-                    </Link>
+                      text="Account"
+                      startIcon={<div><PiUser /></div>}
+                    />
+                  </Link>
                   <Button
                     text=" Password"
                     startIcon={<div> <PiKey /> </div>}
@@ -130,7 +131,7 @@ const Nav = ({ noSideBar, active }) => {
 
               <div className="">
 
-                <Link href="/user/account"> 
+                <Link href="/user/account">
                   <Button
                     funcss={`text-left flex-start padding-5 text-minified ${active == '6' ? 'dark200 ' : ''}`}
                     text="Profile"
@@ -139,44 +140,44 @@ const Nav = ({ noSideBar, active }) => {
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /> </div>}
                   />
                 </Link>
-              {  user.position_id != 5 &&
-                   <Link href="/dashboard"> 
-                   <Button
-                         style={{ marginTop: '1rem' }}
-                     funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'dark200 ' : ''}`}
-                     text="Dashboard"
-                     rounded
-                     fullWidth
-                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
-                   />
-                 </Link>
-              }
-     {   
-                        user.directorate_id == 2 &&
-                <Link href="/configurations">
-                  <Button
-                    style={{ marginTop: '1rem' }}
-                    funcss={`text-left flex-start padding-5 text-minified ${active == '2' ? 'dark200 ' : ''}`}
-                    text="Org Settings"
-                    rounded
-                    fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
-                  />
-                </Link>
-  }
-              {
-                user.position_id != 5 && 
-                <Link href="/staff/profiling">
-                <Button
-                  style={{ marginTop: '1rem' }}
-                  funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'dark200 ' : ''}`}
-                  text="Staff Profiling"
-                  rounded
-                  fullWidth
-                  startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
-                />
-              </Link>
-              }
+                {user.position_id != 5 &&
+                  <Link href="/dashboard">
+                    <Button
+                      style={{ marginTop: '1rem' }}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'dark200 ' : ''}`}
+                      text="Dashboard"
+                      rounded
+                      fullWidth
+                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
+                    />
+                  </Link>
+                }
+                {
+                  user.directorate_id == 2 &&
+                  <Link href="/configurations">
+                    <Button
+                      style={{ marginTop: '1rem' }}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '2' ? 'dark200 ' : ''}`}
+                      text="Org Settings"
+                      rounded
+                      fullWidth
+                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
+                    />
+                  </Link>
+                }
+                {
+                  user.position_id != 5 &&
+                  <Link href="/staff/profiling">
+                    <Button
+                      style={{ marginTop: '1rem' }}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'dark200 ' : ''}`}
+                      text="Staff Profiling"
+                      rounded
+                      fullWidth
+                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
+                    />
+                  </Link>
+                }
                 <DropDown funcss="no-padding ">
                   <Button
                     style={{ marginTop: '1rem' }}
@@ -187,43 +188,70 @@ const Nav = ({ noSideBar, active }) => {
                     startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
                   />
                   <DropMenu
-                  width="200px"
+                    width="200px"
                     animation="ScaleUp"
                     hoverable="hoverable"
                     funcss="padding"
                     duration={0.2}>
+                    <Link href="/leave/myplaning">
+                      <Button
+                        funcss={`text-left flex-start padding-5 text-minified`}
+                        text="My Planing"
+                        rounded
+                        fullWidth
+                        startIcon={<div className="dark900  text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiPaperPlane /> </div>}
+                      />
+                    </Link>
+                    {
+                      user.position_id != 5 &&
                       <Link href="/leave/planing">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
                           text="Leave Planing"
                           rounded
                           fullWidth
-                          startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiCards /> </div>}
+                          startIcon={<div className="dark900  text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiCards /> </div>}
                         />
                       </Link>
+                    }
+                    <Section funcss="bb" />
+                    <Link href="/leave/myrequests">
+                      <Button
+                        funcss={`text-left flex-start padding-5 text-minified`}
+                        text="My Requests"
+                        rounded
+                        fullWidth
+                        startIcon={<div className="dark900  text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiUser /> </div>}
+                      />
+                    </Link>
+                    {
+                      user.position_id != 5 &&
                       <Link href="/leave/request">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
-                          text="Leave Request"
+                          text="All Requests"
                           rounded
                           fullWidth
-                          startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiBriefcase /> </div>}
+                          startIcon={<div className="dark900  text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiBriefcase /> </div>}
                         />
                       </Link>
-                      {
-                        user.directorate_id == 2 &&
+                    }
+                    {
+                      user.directorate_id == 2 &&
+                      <>
+                        <Section funcss="bb" />
                         <Link href="/leave/configuration">
-                        <Button
-                          funcss={`text-left flex-start padding-5 text-minified`}
-                          text="Configuration"
-                          rounded
-                          fullWidth
-                          startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGearLight /> </div>}
-                        />
-                      </Link>
-                      }
-                 
+                          <Button
+                            funcss={`text-left flex-start padding-5 text-minified`}
+                            text="Configuration"
+                            rounded
+                            fullWidth
+                            startIcon={<div className="dark900  text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiGearLight /> </div>}
+                          />
+                        </Link>
+                      </>
 
+                    }
 
 
                   </DropMenu>
@@ -232,7 +260,7 @@ const Nav = ({ noSideBar, active }) => {
 
 
 
-                <div className="margin-top-100 padding-top-20 ">
+                <div className="margin-top-60 ">
                   <Button
                     style={{ marginTop: '1rem' }}
                     funcss={`text-left flex-start padding-5 text-minified _card`}

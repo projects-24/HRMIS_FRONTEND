@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import Nav from '../../components/Nav'
 import Header from '../../components/Header'
 import Card from 'funuicss/ui/card/Card'
@@ -27,7 +26,7 @@ import endPoint from '../../components/endPoint'
 import Success from '../../components/default/success'
 import Alert from 'funuicss/ui/alert/Alert'
 import { FormatDate, GetRequest, GetToken, PatchRequest } from '../../components/Functions'
-export default function LeavePlaning() {
+export default function MyPlaning() {
    const [loading, setloading] = useState(false)
   const [add_data_modal, setadd_data_modal] = useState(false)
   const [update_doc, setupdate_doc] = useState("")
@@ -156,18 +155,87 @@ const Submit = () => {
 
       <Nav active={4}/>
       <div className="content">
+       {
+        add_data_modal ?
+        <MyModal
+        flat 
+        maxwidth={"600px"}
+        close={
+          <CloseModal onClick={Close_Modal} />
+        }
+        title={<>
+        <Text text={update_doc ? update_doc.title : 'Plan Leave'} light heading='h4' block/>
+        </>}
+        sub_title={ <Text text='Plan for a leave' emp/>}
+        body={
+        <div>
+        <div className="row">
+        <div className="col sm-6 lg-6 md-6 padding">
+            <Text text='Start Date' size='small' emp/>
+            <Input type="date" id='proposed_start_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveplanName : ''}  />
+            </div>
+            <div className="col sm-6 lg-6 md-6 padding">
+            <Text text='End Date' size='small' emp/>
+            <Input type="date" id='proposed_end_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveplanName : ''}  />
+            </div>
+            <div className="col sm-12 lg-12 md-12 padding">
+            <Text text='Leave Type' size='small' emp/>
+           <select name="" id="leave_type_id" className='input full-width'>
+            <option value="">Leave Type</option>
+           {
+            leaves &&
+            leaves.map(res => (
+                <option value={res.id} key={res.id}>{res.leaveTypeName}</option>
+            ))
+           }
+           </select>
+            </div>
+        </div>
+
+        </div>
+        }
+        footer={<RowFlex justify='flex-end'>
+             <Button
+     text='Submit Data'
+     startIcon={<PiPaperPlane />}
+     bg='primary'
+     raised
+     bold
+     onClick={Submit}
+     />
+        </RowFlex>}
+        />
+        :''
+       }
+
         <Header 
-        title={ "Leave planings"} 
-        sub_title={"Plans for a leave"}
+        title={ "My Leave plans"} 
+        sub_title={"Plan for a leave"}
         />
 
         <div className='_card'>
        <div className="section">
-       <IconicInput 
+       <RowFlex justify='space-between' gap={1} responsiveSmall>
+        <IconicInput 
     funcss="section width-500-max fit" 
     leftIcon={ <PiMagnifyingGlass />}
     input={<Input type="text" label="search..." funcss="full-width"  onChange={(e) => setfilter(e.target.value)}  />}
      />
+
+     <Button 
+   fillAnimation 
+   onClick={() => {
+    setupdate_doc("")
+    setadd_data_modal(true)
+   }}
+   outlined 
+   outlineSize={0.1}
+   fillTextColor='dark900' 
+    bg="primary" 
+    text="New Plan"
+    startIcon={<PiPlus />}
+    />
+        </RowFlex>
        </div>
        <Table 
        stripped
@@ -175,10 +243,11 @@ const Submit = () => {
        hoverable
        head={<>
          <TableData>Leave</TableData>
-         <TableData>Staff</TableData>
+         <TableData>Email</TableData>
          <TableData>Start Date</TableData>
          <TableData>End Date</TableData>
          <TableData>Created</TableData>
+         <TableData>Delete</TableData>
        </>}
        body={
            <>
@@ -196,10 +265,21 @@ const Submit = () => {
               }).map(res => (
                 <TableRow key={res.id}>
                 <TableData>{res.leaveTypeName}</TableData>
-                <TableData>{res.addedEmail.slice(0, res.addedEmail.indexOf("@"))}</TableData>
+                <TableData>{res.addedEmail}</TableData>
                 <TableData>{FormatDate(res.proposedStartDate).date}</TableData>
                 <TableData>{FormatDate(res.proposedEndDate).date}</TableData>
                 <TableData>{FormatDate(res.createdAt).date}</TableData>
+                <TableData>
+                <ToolTip>
+                <span onClick={() => setdeleteId(res.leaveId) }>
+                <Circle size={2} funcss='raised' bg='error'>
+                   <PiTrash />
+                 </Circle>
+                </span>
+       <Tip funcss='z-index-5' tip="left"  animation="ScaleUp" duration={0.2} content="Delete Object"/>
+       </ToolTip>
+             
+                </TableData>
               </TableRow>
               ))
              }

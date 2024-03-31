@@ -61,12 +61,19 @@ return new Promise((resolve, reject) => {
 export const PatchRequest = (route, id , data) => {
 return new Promise((resolve, reject) => {
     const rt = endPoint + route + "/" + id
-    console.log(rt)
-    Axios.patch(rt , data )
-    .then( res => {
-        resolve(res)
+     GetToken().then((res_data) => {
+        console.log(res_data)
+        Axios.patch(rt , data  , {
+            headers:{
+                "autorization" : `Bearer ${res_data.token}`
+            }
+        })
+        .then( res => {
+            resolve(res)
+        })
+        .catch(err => reject(err))
     })
-    .catch(err => reject(err))
+
 })
 }
 

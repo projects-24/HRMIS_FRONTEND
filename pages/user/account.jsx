@@ -32,7 +32,7 @@ export default function Account() {
                                 <div className='col fit'>
                                     <div >
                                         <Text text={user.first_name  + " " + user.last_name} heading='h4' bold color="dark300"/>
-                                       <RowFlex>
+                                       <RowFlex justify='space-between'>
                                         <div>
                                         <Button 
                                         smaller  
@@ -43,6 +43,12 @@ export default function Account() {
                                         raised
                                         disabled
                                           />
+                                        </div>
+                                        <div>
+                                            <RowFlex gap={0.5}>
+                                                <Text text='Active until:' color='primary'  block/>
+                                                <Text text={user.yearsLeftRetirement} color='dark200' bold  block/>
+                                            </RowFlex>
                                         </div>
                                        </RowFlex>
                                     </div>
@@ -63,6 +69,10 @@ export default function Account() {
                                         <div>
                                             <Text size='small' bold color="primary" text="Contact" block />
                                             <Text size='minified' text={user.contact_number} block />
+                                        </div>
+                                        <div>
+                                            <Text size='small' bold color="primary" text="Directorate" block />
+                                            <Text size='minified' text={user.directoratename} block />
                                         </div>
                                     </RowFlex>
                                     <Grid>

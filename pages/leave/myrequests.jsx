@@ -30,7 +30,7 @@ import StepLine from 'funuicss/ui/step/Line'
 import Grid from "funuicss/ui/grid/Grid"
 import Col from "funuicss/ui/grid/Col"
 import Section from "funuicss/ui/specials/Section"
-export default function LeaveRquest() {
+export default function MyLeaveRquest() {
    const [loading, setloading] = useState(false)
   const [add_data_modal, setadd_data_modal] = useState(false)
   const [update_doc, setupdate_doc] = useState("")
@@ -61,10 +61,9 @@ export default function LeaveRquest() {
   setloading(true)
   GetRequest("/leaverequest")
   .then( res => {
-    console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Section approval" , "HR Approval" ,"GS Approval"  , "View" , "Approve" ] , 
+      "titles" : ["Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" , "Director","GS"  , "View" , "Delete"  ] , 
       "fields" : ["staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
@@ -157,25 +156,6 @@ console.log(doc)
     setmessage("Enter all valid fields")
   }
 
-}
-
-const Approve = (_id) => {
-  console.log(_id)
-  setloading(true)
-  setapproval_modal(false)
-  Axios.patch(endPoint + "/leaveapproval/" + _id, null, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then((res) => {
-    setdocs("")
-    setsuccess(true)
-    setloading(false) 
-  }).catch(err => {
-    setmessage(JSON.stringify(err.response.data.message))
-    setloading(false)
-  })
 }
 
 
@@ -327,14 +307,86 @@ onClick={() => Approve(selected_data.leaveRequestId)}
       {
         loading && <Loader />
       }
-
+      { delete_doc &&
+      <DeleteModal />
+      }
 
       <div className="content">
-   
+    <Modal
+    open={add_data_modal}
+    animation='SlideDown'
+    flat
+    close={<PiX className='pointer hover-text-error' onClick={()=>setadd_data_modal(false)} />}
+    title={<>
+        <Text text={update_doc ? update_doc.title : 'Request Leave'} light heading='h4' block/>
+    </>}
 
-        <Header sub_dir={"Configurations" } sub_dir_route={"/configurations"} title={ "All Requests"} sub_title={"All request for leave by staffs"}/>
+    body={<div>
+      <div className="row">
+          <div className="col sm-6 lg-6 md-6 padding">
+          <Input type="number" id='requested_days' label="Requested Days" funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div>
+          <div className="col sm-6 lg-6 md-6 padding">
+          <Input type="text" id='leave_address' label="Address" funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div>
+          <div className="col sm-6 lg-6 md-6 padding">
+          <Text text='Resumption Date' size='small' emp/>
+          <Input type="date" id='resumption_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div>
+          <div className="col sm-6 lg-6 md-6 padding">
+          <Text text='Date Effective' size='small' emp/>
+          <Input type="date" id='date_effective' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div>
+          <div className="col 12-6 lg-12 md-12 padding">
+          <Text text='Days Remaining' size='small' emp/>
+          <Input id='number_of_days_remaining' label='Days Remaining' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div>
+          <div className="col sm-12 lg-12 md-12 padding">
+          <Text text='Leave Type' size='small' emp/>
+         <select name="" id="leave_type_id" className='input full-width'>
+          <option value="">Leave Type</option>
+         {
+          leaves &&
+          leaves.map(res => (
+              <option value={res.id} key={res.id}>{res.leaveTypeName}</option>
+          ))
+         }
+         </select>
+          </div>
+      </div>
+
+      </div>}
+      footer={<div className='text-right'>
+      <Button
+        text='Submit Data'
+        startIcon={<PiPaperPlane />}
+        bg='primary800'
+        raised
+        bold
+        onClick={Submit}
+        />
+      </div>}
+    />
+    
+
+        <Header title={ "My Request"} sub_title={"Request for a leave"}/>
  
         <div className='_card no-padding'>
+       <div className="padding text-right">
+       <Button 
+   fillAnimation 
+   onClick={() => {
+    setupdate_doc("")
+    setadd_data_modal(true)
+   }}
+   outlined 
+   outlineSize={0.1}
+   fillTextColor='dark900' 
+    bg="primary" 
+    text="New Request"
+    startIcon={<PiPlus />}
+    />
+       </div>
        {
 
 table_data  && 
@@ -368,6 +420,16 @@ customColumns={[
     render: (data) => (
    <div>
     {
+      data.directorApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
+    }
+   </div>
+    ),
+  },
+  {
+    title: 'Actions',
+    render: (data) => (
+   <div>
+    {
       data.gsApproval ? <PiChecks className='text-success' size={15} /> : <PiSpinner size={15} className='' />
     }
    </div>
@@ -387,12 +449,14 @@ customColumns={[
   {
     title: 'Actions',
     render: (data) => (
-      <Circle bg='primary' size={1.5} onClick={() => {
-        setselected_data(data)
-        setapproval_modal(true)
-      }}>
-      <PiCheck />
-      </Circle>
+      <ToolTip>
+      <span onClick={() => setdeleteId(data.leaveRequestId) }>
+      <Circle size={2} funcss='raised' bg='error'>
+         <PiTrash />
+       </Circle>
+      </span>
+<Tip funcss='z-index-5' tip="right"  animation="ScaleUp" duration={0.12} content="Delete"/>
+</ToolTip>
     ),
   }
 ]}
