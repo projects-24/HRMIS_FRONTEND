@@ -52,7 +52,15 @@ export default function LeavePlaning() {
   useEffect(() => {
  if(!docs && token){
   GetRequest("/leaveplan")
-  .then( res => setdocs(res))
+  .then( res => {
+    let data = {
+      "data" : res , 
+      "titles" : ["Staff" , "Leave" ,   "Start" , "Resume" , "Created" , "Updated" ] , 
+      "fields" : ["addedEmail"  , "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
+    }
+    setdocs(data)
+  console.log(res)
+  })
   .catch(err => console.log(err))
  }
   })
@@ -162,52 +170,10 @@ const Submit = () => {
         />
 
         <div className='_card'>
-       <div className="section">
-       <IconicInput 
-    funcss="section width-500-max fit" 
-    leftIcon={ <PiMagnifyingGlass />}
-    input={<Input type="text" label="search..." funcss="full-width"  onChange={(e) => setfilter(e.target.value)}  />}
-     />
-       </div>
-       <Table 
-       stripped
-       funcss='text-small'
-       hoverable
-       head={<>
-         <TableData>Leave</TableData>
-         <TableData>Staff</TableData>
-         <TableData>Start Date</TableData>
-         <TableData>End Date</TableData>
-         <TableData>Created</TableData>
-       </>}
-       body={
-           <>
-             {
-              docs &&
-              docs
-              .filter(res => {
-                if(filter){
-                    if(filter.toString().trim().toLowerCase().includes(res.leaveplanName.slice(0, filter.trim().length).toString().trim().toLowerCase())){
-                        return res
-                    }
-                }else{
-                    return docs
-                }
-              }).map(res => (
-                <TableRow key={res.id}>
-                <TableData>{res.leaveTypeName}</TableData>
-                <TableData>{res.addedEmail.slice(0, res.addedEmail.indexOf("@"))}</TableData>
-                <TableData>{FormatDate(res.proposedStartDate).date}</TableData>
-                <TableData>{FormatDate(res.proposedEndDate).date}</TableData>
-                <TableData>{FormatDate(res.createdAt).date}</TableData>
-              </TableRow>
-              ))
-             }
-          
-
-           </>
+       {
+        docs && 
+        <Table data={docs} />
        }
-       />
        </div>
       </div>
     </div>

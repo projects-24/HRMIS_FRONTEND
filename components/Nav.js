@@ -91,7 +91,7 @@ const Nav = ({ noSideBar, active }) => {
             <div className="">
               <DropDown side="right">
                 <Button funcss={"myBtn"} text={`${user.first_name} ${user.last_name}`} startIcon={
-                  <div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUser /></div>} endIcon={<PiCaretDown />} />
+                  <div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiUser /></div>} endIcon={<PiCaretDown />} />
                 <DropMenu
                   animation="ScaleUp"
                   width="180px"
@@ -133,22 +133,22 @@ const Nav = ({ noSideBar, active }) => {
 
                 <Link href="/user/account">
                   <Button
-                    funcss={`text-left flex-start padding-5 text-minified ${active == '6' ? 'dark200 ' : ''}`}
+                    funcss={`text-left flex-start padding-5 text-minified ${active == '6' ? 'card' : ''}`}
                     text="Profile"
                     rounded
                     fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /> </div>}
+                    startIcon={<div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"><PiUser /> </div>}
                   />
                 </Link>
                 {user.position_id != 5 &&
                   <Link href="/dashboard">
                     <Button
                       style={{ marginTop: '1rem' }}
-                      funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'dark200 ' : ''}`}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '1' ? 'card' : ''}`}
                       text="Dashboard"
                       rounded
                       fullWidth
-                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
+                      startIcon={<div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"><PiGraph /> </div>}
                     />
                   </Link>
                 }
@@ -157,11 +157,11 @@ const Nav = ({ noSideBar, active }) => {
                   <Link href="/configurations">
                     <Button
                       style={{ marginTop: '1rem' }}
-                      funcss={`text-left flex-start padding-5 text-minified ${active == '2' ? 'dark200 ' : ''}`}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '2' ? 'card' : ''}`}
                       text="Org Settings"
                       rounded
                       fullWidth
-                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
+                      startIcon={<div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiGear /> </div>}
                     />
                   </Link>
                 }
@@ -170,22 +170,22 @@ const Nav = ({ noSideBar, active }) => {
                   <Link href="/staff/profiling">
                     <Button
                       style={{ marginTop: '1rem' }}
-                      funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'dark200 ' : ''}`}
+                      funcss={`text-left flex-start padding-5 text-minified ${active == '3' ? 'card' : ''}`}
                       text="Staff Profiling"
                       rounded
                       fullWidth
-                      startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
+                      startIcon={<div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiUsers /> </div>}
                     />
                   </Link>
                 }
                 <DropDown funcss="no-padding ">
                   <Button
                     style={{ marginTop: '1rem' }}
-                    funcss={`text-left flex-start padding-5 text-minified ${active == '4' ? 'dark200 ' : ''}`}
+                    funcss={`text-left flex-start padding-5 text-minified ${active == '4' ? 'card' : ''}`}
                     text="Leave Mgt"
                     rounded
                     fullWidth
-                    startIcon={<div className="dark200 width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
+                    startIcon={<div className="dark800 text-dark width-30 height-30 padding-5 roundEdgeSmall central"> <PiLeaf /> </div>}
                   />
                   <DropMenu
                     width="200px"

@@ -59,7 +59,7 @@ export default function MyLeaveRquest() {
   useEffect(() => {
  if(!table_data && token){
   setloading(true)
-  GetRequest("/leaverequest")
+  GetRequest("/myleaverequest/" + user.staff_id)
   .then( res => {
     let data = {
       "data" : res , 
@@ -455,7 +455,7 @@ customColumns={[
          <PiTrash />
        </Circle>
       </span>
-<Tip funcss='z-index-5' tip="right"  animation="ScaleUp" duration={0.12} content="Delete"/>
+<Tip funcss='z-index-5' tip="left"  animation="ScaleUp" duration={0.12} content="Delete"/>
 </ToolTip>
     ),
   }

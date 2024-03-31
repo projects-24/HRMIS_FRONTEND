@@ -243,7 +243,7 @@ const Submit = () => {
        hoverable
        head={<>
          <TableData>Leave</TableData>
-         <TableData>Email</TableData>
+         {/* <TableData>Email</TableData> */}
          <TableData>Start Date</TableData>
          <TableData>End Date</TableData>
          <TableData>Created</TableData>
@@ -265,7 +265,7 @@ const Submit = () => {
               }).map(res => (
                 <TableRow key={res.id}>
                 <TableData>{res.leaveTypeName}</TableData>
-                <TableData>{res.addedEmail}</TableData>
+                {/* <TableData>{res.addedEmail}</TableData> */}
                 <TableData>{FormatDate(res.proposedStartDate).date}</TableData>
                 <TableData>{FormatDate(res.proposedEndDate).date}</TableData>
                 <TableData>{FormatDate(res.createdAt).date}</TableData>

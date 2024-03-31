@@ -1,6 +1,5 @@
 import '../styles/_styles.css'
 import '../styles/style.css'
-import '../styles/default.css'
 import '../styles/lineIcons/css/simple-line-icons.css'
 import Head from 'next/head'
 import 'funuicss/css/fun.css'
