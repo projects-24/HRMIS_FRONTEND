@@ -9,7 +9,7 @@ import Section from "funuicss/ui/specials/Section"
 import Button from 'funuicss/ui/button/Button'
 import Modal from 'funuicss/ui/modal/Modal'
 import Text from 'funuicss/ui/text/Text'
-import { PiX } from 'react-icons/pi'
+import { PiX  , PiCheck} from 'react-icons/pi'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
 import Circle from 'funuicss/ui/specials/Circle'
 
