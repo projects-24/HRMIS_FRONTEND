@@ -26,7 +26,7 @@ import Axios from 'axios'
 import endPoint from '../../../components/endPoint'
 import Success from '../../../components/default/success'
 import Alert from 'funuicss/ui/alert/Alert'
-import { GetRequest, PatchRequest } from '../../../components/Functions'
+import { GetRequest, GetToken, PatchRequest } from '../../../components/Functions'
 export default function Region() {
    const [loading, setloading] = useState(false)
   const [add_data_modal, setadd_data_modal] = useState(false)
@@ -38,6 +38,16 @@ export default function Region() {
   const [filter, setfilter] = useState("")
 
   const [docs, setdocs] = useState("")
+
+  useEffect(() => {
+    GetToken()
+        .then(res => {
+           if(res.user.position_id != 2){
+            window.location.assign("/401")
+           }
+        })
+}, [])
+
   useEffect(() => {
  if(!docs){
   GetRequest("/region")

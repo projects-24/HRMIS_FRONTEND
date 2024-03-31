@@ -37,7 +37,7 @@ export default function Dashboard() {
   if (user && user.position_id != 5) {
     return (
       <div className="">
-        <div className='content'>
+        <div className='content '>
           <Nav active={1} />
 
           <div className="">

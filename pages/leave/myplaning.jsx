@@ -42,8 +42,15 @@ export default function MyPlaning() {
 
   useEffect(() => {
     if(!leaves && token){
-     GetRequest("/leavetype")
-     .then( res => setleaves(res))
+     GetRequest("/Myleaveplan/" + user.staff_id)
+     .then( res => {
+        let data = {
+            "data" : res , 
+            "titles" : ["Staff" , "Leave" ,   "Start" , "Resume" , "Created" , "Updated"  , "Delete"] , 
+            "fields" : ["addedEmail"  , "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
+          }
+        setleaves(data)
+    })
      .catch(err => console.log(err))
     }
      })
@@ -89,7 +96,8 @@ const Submit = () => {
         "proposedStartDate": proposed_start_date,
         "proposedEndDate": proposed_end_date,
         "leaveTypeId": leave_type_id,
-        "addedEmail": user.email
+        "addedEmail": user.email  , 
+        "staffId" : user.staff_id 
     }
   setadd_data_modal(false)
   if(proposed_start_date && proposed_end_date && leave_type_id){
@@ -214,15 +222,8 @@ const Submit = () => {
         />
 
         <div className='_card'>
-       <div className="section">
-       <RowFlex justify='space-between' gap={1} responsiveSmall>
-        <IconicInput 
-    funcss="section width-500-max fit" 
-    leftIcon={ <PiMagnifyingGlass />}
-    input={<Input type="text" label="search..." funcss="full-width"  onChange={(e) => setfilter(e.target.value)}  />}
-     />
-
-     <Button 
+       <div className="section text-right">
+       <Button 
    fillAnimation 
    onClick={() => {
     setupdate_doc("")
@@ -235,59 +236,29 @@ const Submit = () => {
     text="New Plan"
     startIcon={<PiPlus />}
     />
-        </RowFlex>
        </div>
-       <Table 
-       stripped
-       funcss='text-small'
-       hoverable
-       head={<>
-         <TableData>Leave</TableData>
-         {/* <TableData>Email</TableData> */}
-         <TableData>Start Date</TableData>
-         <TableData>End Date</TableData>
-         <TableData>Created</TableData>
-         <TableData>Delete</TableData>
-       </>}
-       body={
-           <>
-             {
-              docs &&
-              docs
-              .filter(res => {
-                if(filter){
-                    if(filter.toString().trim().toLowerCase().includes(res.leaveplanName.slice(0, filter.trim().length).toString().trim().toLowerCase())){
-                        return res
-                    }
-                }else{
-                    return docs
-                }
-              }).map(res => (
-                <TableRow key={res.id}>
-                <TableData>{res.leaveTypeName}</TableData>
-                {/* <TableData>{res.addedEmail}</TableData> */}
-                <TableData>{FormatDate(res.proposedStartDate).date}</TableData>
-                <TableData>{FormatDate(res.proposedEndDate).date}</TableData>
-                <TableData>{FormatDate(res.createdAt).date}</TableData>
-                <TableData>
+     {
+        leaves && 
+        <Table 
+        data={leaves}
+        pageSize={10}
+        customColumns={[
+            {
+              title: 'Actions',
+              render: (data) => (
                 <ToolTip>
-                <span onClick={() => setdeleteId(res.leaveId) }>
+                <span onClick={() => setdeleteId(data.leaveId) }>
                 <Circle size={2} funcss='raised' bg='error'>
                    <PiTrash />
                  </Circle>
                 </span>
-       <Tip funcss='z-index-5' tip="left"  animation="ScaleUp" duration={0.2} content="Delete Object"/>
-       </ToolTip>
-             
-                </TableData>
-              </TableRow>
-              ))
-             }
-          
-
-           </>
-       }
-       />
+          <Tip funcss='z-index-5' tip="left"  animation="ScaleUp" duration={0.12} content="Delete"/>
+          </ToolTip>
+              ),
+            }
+          ]}
+        />
+     }
        </div>
       </div>
     </div>
