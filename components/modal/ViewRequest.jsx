@@ -23,7 +23,7 @@ export default function ViewRequest({selected_data , open , close , current_user
     close={close}
     title={
 <>
-<Text heading='h5' bold text={selected_data.firstName + " " + selected_data.lastName} block/>
+<Text heading='h5' bold text={selected_data.fullName} block/>
   <Text bold text={selected_data.leaveTypeName} size='small' color="primary"/>
 </>
   }
