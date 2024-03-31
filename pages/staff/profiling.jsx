@@ -5,13 +5,6 @@ import Loader from '../../components/loader';
 import Axios from 'axios';
 import endPoint from '../../components/endPoint';
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import dynamic from "next/dynamic"
 import Header from '../../components/Header'
 import { GetToken } from '../../components/Functions';
 import Button from "funuicss/ui/button/Button"
@@ -22,15 +15,8 @@ export default function Profiling() {
   const [loading, setloading] = useState(false)
   const [token, settoken] = useState("")
   const [user, setuser] = useState("")
-  const [open, setOpen] = React.useState(false);
-  const [current, setcurrent] = useState(null)
-  const [currentId, setcurrentId] = useState("")
-  const [userStatus, setuserStatus] = useState("")
   const [docs, setdocs] = useState(null)
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     GetToken()
@@ -52,7 +38,7 @@ export default function Profiling() {
         console.log(getDocs)
         let data = {
           "data": getDocs,
-          "titles": ["Staff", "Firstname", "Lastname", "Directorate", "position", "Section", "Region", "View"],
+          "titles": ["Staff", "Firstname", "Lastname", "Directorate", "position", "Section", "Region"],
           "fields": ["id", "firstName", "lastName", "directorate", "position", "section", "region"],
         }
         setdocs(data)
@@ -61,27 +47,6 @@ export default function Profiling() {
   })
 
 
-
-  const Edit = () => {
-    Axios.patch(endPoint + "/staff/updatestaff/" + currentId,
-      { status: userStatus },
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-
-        }
-
-      }
-    ).then(() => {
-      alert("successfully updated")
-      setOpen(false)
-      setdocs(null)
-    }).catch(err => {
-      alert(err.message)
-      setOpen(false)
-
-    })
-  }
 
 
 
@@ -92,34 +57,7 @@ export default function Profiling() {
       <div className={ "content"}>
 
 
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Edit Status for {current ? current.surname + " " + current.middleName + " " + current.firstName : ""}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Select the users status.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              select
-              id="name"
-              label="Select user status"
-              type="email"
-              defaultValue={current ? current.status : ""}
-              fullWidth
-              onChange={(e) => setuserStatus(e.target.value)}
-              variant="outlined"
-            >
-              <option value="leave">On Leave</option>
-              <option value="field">On Field</option>
-              <option value="post">On Post</option>
-            </TextField>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={Edit}>Make Changes</Button>
-          </DialogActions>
-        </Dialog>
+     
         {
           loading ?
             <Loader />
@@ -163,18 +101,18 @@ export default function Profiling() {
                 <Table
                   data={docs}
                   pageSize={10}
-                  customColumns={[
-                    {
-                      title: 'Actions',
-                      render: (data) => (
-                        <Circle bg='primary' size={1.5} onClick={() => {
+                  // customColumns={[
+                  //   {
+                  //     title: 'Actions',
+                  //     render: (data) => (
+                  //       <Circle bg='primary' size={1.5} onClick={() => {
 
-                        }}>
-                          <PiEye />
-                        </Circle>
-                      ),
-                    },
-                  ]}
+                  //       }}>
+                  //         <PiEye />
+                  //       </Circle>
+                  //     ),
+                  //   },
+                  // ]}
                 />
 
               </div>

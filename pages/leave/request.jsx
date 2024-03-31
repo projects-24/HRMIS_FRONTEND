@@ -54,7 +54,7 @@ export default function LeaveRquest() {
     console.log(res)
     let data = {
       "data" : res , 
-      "titles" : ["Full Name" ,"Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" ,"GS" , "Director"  , "Status" , "View" , "Approve" ] , 
+      "titles" : ["Full Name" ,"Staff" ,  "Leave" , "Effective" , "Resume","Section" , "HR" , user.position_id === 1 || user.position_id === 2 || user.position_id === 3 ? "GS" : "" , "Director"  , "Status" , "View" , "Approve" ] , 
       "fields" : ["fullName" , "staffId"  , "leaveTypeName" ,  "dateEffective" , "resumptionDate" ] , 
     }
     settable_data(data)
@@ -82,72 +82,7 @@ export default function LeaveRquest() {
 },[message , success])
 
 
-const Submit = () => {
-  const requested_days = FunGet.val("#requested_days")
-  const leave_address = FunGet.val("#leave_address")
-  const resumption_date = FunGet.val("#resumption_date")
-  const date_effective = FunGet.val("#date_effective")
-  const number_of_days_remaining = FunGet.val("#number_of_days_remaining")
-  const leave_type_id = FunGet.val("#leave_type_id")
 
-
-  const doc = 
-    {
-        "requestedDays": requested_days,
-        "leaveAddress": leave_address,
-        "resumptionDate": resumption_date,
-        "dateEffective": date_effective,
-        "numberOfDaysRemaining": number_of_days_remaining,
-        "sectionalHeadApproval": false,
-        "directorApproval": false,
-        "hrApproval": false,
-        "leaveStatus": true,
-        "staffId": user.staff_id,
-        "leaveAllocationId": null,
-        "leaveTypeId": leave_type_id,
-        "gsApproval": null,
-        "addedEmail": user.email
-    }
-console.log(doc)
-  setadd_data_modal(false)
-  if(requested_days && leave_address && resumption_date && date_effective && leave_type_id){
-    setloading(true)
-    if(update_doc){
-      PatchRequest( "/leaverequest" , update_doc.id , {
-        leavetype:val
-      })
-      .then( (res) => {
-       if(res){
-        setsuccess(true)
-        setdocs("")
-        setloading(false)
-       }
-      })
-      .catch(err => {
-        setmessage(JSON.stringify(err.message))
-        setloading(false)
-      })
-
-    }else{
-    Axios.post(endPoint + "/leaverequest" , doc)
-    .then( (res) => {
-           setloading(false)
-           console.log(res)
-     if(res.data){
-      setdocs("")
-      setsuccess(true)
-     }
-    })
-    .catch(err => {
-      setmessage(JSON.stringify(err.response.data.message))
-      setloading(false)
-    })
-    }
-  }else{
-    setmessage("Enter all valid fields")
-  }
-
-}
 
 const Approve = (_id) => {
   console.log(_id)
