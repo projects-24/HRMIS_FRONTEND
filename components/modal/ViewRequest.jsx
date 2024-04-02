@@ -29,7 +29,21 @@ export default function ViewRequest({selected_data , open , close , current_user
   }
     body={<>
 <StepContainer responsiveMedium  >
-
+<Step>
+<StepHeader>
+    <RowFlex gap={1}>
+    <Circle bg={selected_data.sectionalHeadApproval ? "success" : "error"} size={2} funcss="raised">
+    {selected_data.sectionalHeadApproval ? <PiCheck /> : <PiX />}
+</Circle>
+<div>
+<Text text={"Section"} heading="h5"/>
+<div />
+<Text text={"Approval"} size="small" color={"dark200"} bold/>
+</div>
+    </RowFlex>
+</StepHeader>
+</Step>
+<StepLine />
 <Step>
 <StepHeader>
     <RowFlex gap={1}>
@@ -48,11 +62,11 @@ export default function ViewRequest({selected_data , open , close , current_user
 <Step>
 <StepHeader>
     <RowFlex gap={1}>
-    <Circle bg={selected_data.sectionalHeadApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.sectionalHeadApproval ? <PiCheck /> : <PiX />}
+    <Circle bg={selected_data.directorApproval ? "success" : "error"} size={2} funcss="raised">
+    {selected_data.directorApproval ? <PiCheck /> : <PiX />}
 </Circle>
 <div>
-<Text text={"Section"} heading="h5"/>
+<Text text={"Director"} heading="h5"/>
 <div />
 <Text text={"Approval"} size="small" color={"dark200"} bold/>
 </div>
@@ -60,7 +74,6 @@ export default function ViewRequest({selected_data , open , close , current_user
 </StepHeader>
 </Step>
 <StepLine />
-
 {
      current_user.position_id === 1 || current_user.position_id === 2 || current_user.position_id === 3 ? 
      <>
@@ -78,24 +91,10 @@ export default function ViewRequest({selected_data , open , close , current_user
     </RowFlex>
 </StepHeader>
 </Step>
-<StepLine />
      </>
      : <></>
 }
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.directorApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.directorApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"Director"} heading="h5"/>
-<div />
-<Text text={"Approval"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
+
 
 </StepContainer>
 <Section gap={2} funcss='bb'/>

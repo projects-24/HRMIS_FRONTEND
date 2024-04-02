@@ -25,19 +25,15 @@ export default function Home() {
 
   const [api_online, setapi_online] = useState(false)
   useEffect(() => {
-    if (!api_online) {
       Axios.get("https://hrmis.onrender.com")
         .then((res) => {
           setapi_online(true)
-          console.log(res)
-          // if(res.data.status == "ok"){
-          // }
         })
         .catch(err => {
           setmessage(err.message)
+          setapi_online( () => !api_online)
         })
-    }
-  })
+  } , [api_online])
 
 
 

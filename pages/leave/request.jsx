@@ -98,7 +98,7 @@ const Approve = (_id) => {
     setsuccess(true)
     setloading(false) 
   }).catch(err => {
-    setmessage(JSON.stringify(err.response.data.message))
+    setmessage(err.response.data.message ? err.response.data.message : JSON.stringify(err.message))
     setloading(false)
   })
 }
