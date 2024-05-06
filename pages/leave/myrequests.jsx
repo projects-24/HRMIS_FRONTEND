@@ -7,7 +7,7 @@ import Card from 'funuicss/ui/card/Card'
 import Table from 'funuicss/ui/table/Table'
 import Circle from 'funuicss/ui/specials/Circle'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
-import { PiCheck, PiChecks, PiEye, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiSpinner, PiTrash, PiX } from 'react-icons/pi'
+import { PiArrowRight, PiCheck, PiChecks, PiEye, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiSpinner, PiTrash, PiX } from 'react-icons/pi'
 import ToolTip from 'funuicss/ui/tooltip/ToolTip'
 import Tip from 'funuicss/ui/tooltip/Tip'
 import Input from 'funuicss/ui/input/Input'
@@ -46,7 +46,7 @@ export default function MyLeaveRquest() {
   const [leaves, setleaves] = useState("")
   const [viewModal, setviewModal] = useState(false)
   const [selected_data, setselected_data] = useState("")
-  const [approval_modal, setapproval_modal] = useState(false)
+  const [preview_modal, setpreview_modal] = useState(false)
 
   const [table_data, settable_data] = useState("")
   useEffect(() => {
@@ -92,22 +92,19 @@ export default function MyLeaveRquest() {
 },[message , success])
 
 
-const Submit = () => {
-  const requested_days = FunGet.val("#requested_days")
+const proceed = () => {
+  const requested_days = intervalDays
   const leave_address = FunGet.val("#leave_address")
   const resumption_date = FunGet.val("#resumption_date")
   const date_effective = FunGet.val("#date_effective")
-  const number_of_days_remaining = FunGet.val("#number_of_days_remaining")
   const leave_type_id = FunGet.val("#leave_type_id")
 
 
-  const doc = 
-    {
+  const doc = {
         "requestedDays": requested_days,
         "leaveAddress": leave_address,
         "resumptionDate": resumption_date,
         "dateEffective": date_effective,
-        "numberOfDaysRemaining": number_of_days_remaining,
         "sectionalHeadApproval": false,
         "directorApproval": false,
         "hrApproval": false,
@@ -118,28 +115,29 @@ const Submit = () => {
         "gsApproval": null,
         "addedEmail": user.email
     }
-console.log(doc)
-  setadd_data_modal(false)
-  if(requested_days && leave_address && resumption_date && date_effective && leave_type_id){
-    setloading(true)
-    if(update_doc){
-      PatchRequest( "/leaverequest" , update_doc.id , {
-        leavetype:val
-      })
-      .then( (res) => {
-       if(res){
-        setsuccess(true)
-        setdocs("")
-        setloading(false)
-       }
-      })
-      .catch(err => {
-        setmessage(JSON.stringify(err.message))
-        setloading(false)
-      })
+    if(
+      requested_days && 
+      leave_address && 
+      resumption_date && 
+      date_effective && 
+      leave_type_id){
 
-    }else{
-    Axios.post(endPoint + "/leaverequest" , doc)
+    setselected_data(doc)
+    setadd_data_modal(false)
+    setpreview_modal(true)
+  }else{
+    setmessage("Enter all valid fields")
+  }
+}
+
+const Submit = () => {
+  setpreview_modal(false)
+    setloading(true)
+    Axios.post((endPoint) + "/leaverequest" , selected_data , {
+      headers: {
+        'Authorization': 'Bearer' + ' ' + token
+      }
+    })
     .then( (res) => {
            setloading(false)
            console.log(res)
@@ -148,52 +146,110 @@ console.log(doc)
       setsuccess(true)
      }
     })
-    .catch(err => {
+    .catch((err) => {
       setmessage(JSON.stringify(err.response.data.message))
       setloading(false)
     })
-    }
-  }else{
-    setmessage("Enter all valid fields")
-  }
+
 
 }
+
+const [startDate, setStartDate] = useState('');
+const [endDate, setEndDate] = useState('');
+const [intervalDays, setIntervalDays] = useState(null);
+
+const calculateInterval = () => {
+if(startDate && endDate) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  let weekdays = 0;
+
+  // Iterate through each day between start and end dates
+  for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+    const dayOfWeek = date.getDay();
+    // Count only if it's not Saturday (6) or Sunday (0)
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+      weekdays++;
+    }
+  }
+  setIntervalDays(weekdays)
+  return weekdays;
+
+}else{
+  return 0
+}
+};
+
+
+const validateDate = (selectedDate) => {
+  const dateObject = new Date(selectedDate);
+  const dayOfWeek = dateObject.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+  // Check if selected date is a weekday (Monday to Friday)
+  if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+  } else {
+    setmessage('Please select a weekday (Monday to Friday).');
+  }
+};
+
+useEffect(() => {
+ calculateInterval()
+},[startDate, endDate])
 
 
   return (
     <div>
       <Nav active={4}/>
   <Modal 
-   open={approval_modal}
-   maxWidth='500px'
+   open={preview_modal}
+   maxWidth='800px'
    animation='SlideDown'
    flat
-   close={<PiX className='pointer hover-text-error' onClick={()=>setapproval_modal(false)} />}
+   close={<PiX className='pointer hover-text-error' onClick={()=>setpreview_modal(false)} />}
    title={
 <>
-<Text heading='h5' bold text={selected_data.addedEmail} block/>
- <Text bold text={selected_data.leaveTypeName} size='small' color="primary"/>
+<Text heading='h5' bold text={'Proceed with Request'} block/>
+ <Text  text={"proceed with your request"} size='small' color="dark300"/>
 </>
  }
 
 body={
-<Text text='Do you want to approve the leave for the above staff ☝' />
+<div>
+<Grid>
+<Col sm={6} md={3} lg={3} funcss='padding'>
+      <Text size='small' bold color="primary" text="Effective" block/>
+      <Text size='minified'  text={selected_data.dateEffective} block/>
+    </Col>
+<Col sm={6} md={3} lg={3} funcss='padding'>
+      <Text size='small' bold color="primary" text="Resume" block/>
+      <Text size='minified'  text={selected_data.resumptionDate} block/>
+    </Col>
+<Col sm={6} md={3} lg={3} funcss='padding'>
+      <Text size='small' bold color="primary" text="Days Requested" block/>
+      <Text size='minified'  text={intervalDays} block/>
+    </Col>
+    <Col sm={6} md={3} lg={3} funcss='padding'>
+      <Text size='small' bold color="primary" text="Address" block/>
+      <Text size='minified'  text={selected_data.leaveAddress} block/>
+    </Col>
+    </Grid>
+</div>
 }
 footer={
   <RowFlex gap={1} justify='flex-end'>
 <Button 
-text='No'
+text='Cancel'
 bg='dark300'
 endIcon={<PiX />}
 bold 
-onClick={()=>setapproval_modal(false)}
+onClick={()=>setpreview_modal(false)}
 />
 <Button 
-text='Yes'
+text='Submit'
 bg='primary'
 endIcon={<PiCheck />}
 bold 
-onClick={() => Approve(selected_data.leaveRequestId)}
+onClick={() => Submit()}
 />
   </RowFlex>
 }
@@ -205,7 +261,7 @@ onClick={() => Approve(selected_data.leaveRequestId)}
 }
       {
         deleteId &&
-        <DeleteModal  route={"/leavetype"} id={deleteId}/>
+        <DeleteModal  route={"/leaverequest"} id={deleteId}/>
       }
          {
     message &&  <div>
@@ -227,33 +283,43 @@ onClick={() => Approve(selected_data.leaveRequestId)}
     <Modal
     open={add_data_modal}
     animation='SlideDown'
+    maxWidth='800px'
     flat
     close={<PiX className='pointer hover-text-error' onClick={()=>setadd_data_modal(false)} />}
     title={<>
-        <Text text={update_doc ? update_doc.title : 'Request Leave'} light heading='h4' block/>
+        <Text bold text={update_doc ? update_doc.title : '📝 Request Leave'}  heading='h4' color='dark300' block/>
+        <Text  text= 'Enter all the details correctly to create a new request'  size='small' color='dark400' />
     </>}
 
     body={<div>
       <div className="row">
+
           <div className="col sm-6 lg-6 md-6 padding">
-          <Input type="number" id='requested_days' label="Requested Days" funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
-          </div>
-          <div className="col sm-6 lg-6 md-6 padding">
-          <Input type="text" id='leave_address' label="Address" funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          <Text text='Date Effective' size='small' emp/>
+          <Input type="date" id='date_effective'           
+          onChange={(e) => {
+            validateDate(e.target.value);
+            setStartDate(e.target.value);
+          }}
+ funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
           </div>
           <div className="col sm-6 lg-6 md-6 padding">
           <Text text='Resumption Date' size='small' emp/>
-          <Input type="date" id='resumption_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          <Input onChange={(e) => {
+            validateDate(e.target.value);
+            setEndDate(e.target.value);
+          }} type="date" id='resumption_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
           </div>
+
+          {/* <div className="col sm-6 lg-6 md-6 padding">
+          <Input value={intervalDays ? intervalDays : 0} type="number" id='requested_days' label="Requested Days" funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          </div> */}
           <div className="col sm-6 lg-6 md-6 padding">
-          <Text text='Date Effective' size='small' emp/>
-          <Input type="date" id='date_effective' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
+          <Text text='Leave Address' size='small' emp/>
+          <Input type="text" id='leave_address' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
           </div>
-          <div className="col 12-6 lg-12 md-12 padding">
-          <Text text='Days Remaining' size='small' emp/>
-          <Input id='number_of_days_remaining' label='Days Remaining' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
-          </div>
-          <div className="col sm-12 lg-12 md-12 padding">
+
+          <div className="col sm-12 lg-6 md-6 padding">
           <Text text='Leave Type' size='small' emp/>
          <select name="" id="leave_type_id" className='input full-width'>
           <option value="">Leave Type</option>
@@ -270,12 +336,14 @@ onClick={() => Approve(selected_data.leaveRequestId)}
       </div>}
       footer={<div className='text-right'>
       <Button
-        text='Submit Data'
-        startIcon={<PiPaperPlane />}
-        bg='primary800'
+        text='Proceed'
+        endIcon={<PiArrowRight />}
+        bg='primary'
         raised
         bold
-        onClick={Submit}
+        onClick={ () => {
+          proceed();
+        } }
         />
       </div>}
     />

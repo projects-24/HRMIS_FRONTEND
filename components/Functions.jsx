@@ -65,7 +65,7 @@ return new Promise((resolve, reject) => {
         console.log(res_data)
         Axios.patch(rt , data  , {
             headers:{
-                "autorization" : `Bearer ${res_data.token}`
+                "Authorization" : `Bearer ${res_data.token}`
             }
         })
         .then( res => {

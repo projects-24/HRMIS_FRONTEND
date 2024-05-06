@@ -64,7 +64,7 @@ export default function Home() {
                 }, 2000);
               })
           }).catch(err => {
-            if (err.message === "Request failed with status code 422") {W
+            if (err.message === "Request failed with status code 422") {
               setmessage("Wrong credentials")
               setloader(false)
             } else {
