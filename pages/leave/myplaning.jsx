@@ -2,21 +2,16 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../../components/Nav'
 import Header from '../../components/Header'
-import Card from 'funuicss/ui/card/Card'
 import Table from 'funuicss/ui/table/Table'
-import TableData from 'funuicss/ui/table/Data'
-import TableRow from 'funuicss/ui/table/Row'
 import Circle from 'funuicss/ui/specials/Circle'
 import RowFlex from 'funuicss/ui/specials/RowFlex'
 import { PiCheck, PiMagnifyingGlass, PiPaperPlane, PiPen, PiPlus, PiTrash, PiX } from 'react-icons/pi'
 import ToolTip from 'funuicss/ui/tooltip/ToolTip'
 import Tip from 'funuicss/ui/tooltip/Tip'
 import Input from 'funuicss/ui/input/Input'
-import IconicInput from 'funuicss/ui/input/Iconic'
 import Button from 'funuicss/ui/button/Button'
 import Modal from 'funuicss/ui/modal/Modal'
 import Text from 'funuicss/ui/text/Text'
-import MyModal from '../../components/Modal'
 import CloseModal from 'funuicss/ui/modal/Close'
 import {FunGet} from "funuicss/js/Fun"
 import Loader from '../../components/loader'
@@ -39,6 +34,15 @@ export default function MyPlaning() {
   const [token, settoken] = useState("")
   const [user, setuser] = useState(null)
   const [leaves, setleaves] = useState("")
+  const [all_leaves, setall_leaves] = useState("")
+
+  useEffect(() => {
+    if(!leaves && token){
+     GetRequest("/leavetype")
+     .then( res => setall_leaves(res))
+     .catch(err => console.log(err))
+    }
+     })
 
   useEffect(() => {
     if(!leaves && token){
@@ -109,8 +113,8 @@ const Submit = () => {
       .then( (res) => {
        if(res){
         setsuccess(true)
-        setdocs("")
         setloading(false)
+        setleaves("")
        }
       })
       .catch(err => {
@@ -124,7 +128,7 @@ const Submit = () => {
            setloading(false)
            console.log(res)
      if(res.data){
-      setdocs("")
+      setleaves("")
       setsuccess(true)
      }
     })
@@ -163,18 +167,18 @@ const Submit = () => {
 
       <Nav active={4}/>
       <div className="content">
-       {
-        add_data_modal ?
-        <MyModal
+     
+        <Modal
+        open={add_data_modal}
         flat 
         maxwidth={"600px"}
         close={
-          <CloseModal onClick={Close_Modal} />
+          <CloseModal onClick={() => Close_Modal()} />
         }
         title={<>
         <Text text={update_doc ? update_doc.title : 'Plan Leave'} light heading='h4' block/>
         </>}
-        sub_title={ <Text text='Plan for a leave' emp/>}
+        // sub_title={ <Text text='Plan for a leave' emp/>}
         body={
         <div>
         <div className="row">
@@ -191,10 +195,11 @@ const Submit = () => {
            <select name="" id="leave_type_id" className='input full-width'>
             <option value="">Leave Type</option>
            {
-            leaves &&
-            leaves.map(res => (
+            all_leaves ?
+            all_leaves.map(res => (
                 <option value={res.id} key={res.id}>{res.leaveTypeName}</option>
             ))
+            : <></ >
            }
            </select>
             </div>
@@ -213,8 +218,7 @@ const Submit = () => {
      />
         </RowFlex>}
         />
-        :''
-       }
+   
 
         <Header 
         title={ "My Leave plans"} 
