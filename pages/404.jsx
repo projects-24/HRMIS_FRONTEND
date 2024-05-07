@@ -1,6 +1,7 @@
 import React from 'react'
 import NotFound from 'funuicss/ui/page/NotFound'
 import Button from 'funuicss/ui/button/Button'
+import { PiArrowRight } from 'react-icons/pi'
 export default function App() {
 
 return (
