@@ -227,27 +227,26 @@ const Submit = () => {
         />
 
         <div className='_card'>
-       <div className="section text-right">
-       <Button 
-   fillAnimation 
-   onClick={() => {
-    setupdate_doc("")
-    setadd_data_modal(true)
-   }}
-   outlined 
-   outlineSize={0.1}
-   fillTextColor='dark900' 
-    bg="primary" 
-    text="New Plan"
-    startIcon={<PiPlus />}
-    />
-       </div>
      {
         leaves && 
         <Table 
+        right={<Button 
+          fillAnimation 
+          onClick={() => {
+           setupdate_doc("")
+           setadd_data_modal(true)
+          }}
+          outlined 
+          outlineSize={0.1}
+          fillTextColor='dark900' 
+           bg="primary" 
+           text="New Plan"
+           startIcon={<PiPlus />}
+           />}
         filterableFields={['leaveTypeName']}
         data={leaves}
         pageSize={10}
+        isLoading = {true ? leaves.length < 0 : false}
         customColumns={[
             {
               title: 'Actions',

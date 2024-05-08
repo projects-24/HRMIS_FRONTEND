@@ -352,27 +352,27 @@ onClick={() => Submit()}
         <Header title={ "My Request"} sub_title={"Request for a leave"}/>
  
         <div className='_card no-padding'>
-       <div className="padding text-right">
-       <Button 
-   fillAnimation 
-   onClick={() => {
-    setupdate_doc("")
-    setadd_data_modal(true)
-   }}
-   outlined 
-   outlineSize={0.1}
-   fillTextColor='dark900' 
-    bg="primary" 
-    text="New Request"
-    startIcon={<PiPlus />}
-    />
-       </div>
+   
        {
 
 table_data  && 
 <div >
 <Table
+right={      <Button 
+  fillAnimation 
+  onClick={() => {
+   setupdate_doc("")
+   setadd_data_modal(true)
+  }}
+  outlined 
+  outlineSize={0.1}
+  fillTextColor='dark900' 
+   bg="primary" 
+   text="New Request"
+   startIcon={<PiPlus />}
+   />}
 data={table_data}
+filterableFields={['leaveTypeName']}
 pageSize={10}
 customColumns={[
   {

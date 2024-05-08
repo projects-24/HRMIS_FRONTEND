@@ -184,6 +184,7 @@ table_data  &&
 <Table
 data={table_data}
 pageSize={10}
+filterableFields={['leaveTypeName']}
 customColumns={[
   {
     title: 'Actions',

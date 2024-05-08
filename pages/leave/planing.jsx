@@ -99,7 +99,7 @@ export default function LeavePlaning() {
         <div className='_card'>
        {
         docs && 
-        <Table data={docs} />
+        <Table data={docs} filterableFields={['leaveTypeName', 'directorate', 'section']}/>
        }
        </div>
       </div>
