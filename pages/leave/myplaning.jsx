@@ -245,6 +245,7 @@ const Submit = () => {
      {
         leaves && 
         <Table 
+        filterableFields={['leaveTypeName']}
         data={leaves}
         pageSize={10}
         customColumns={[
