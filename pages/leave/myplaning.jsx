@@ -51,8 +51,9 @@ export default function MyPlaning() {
         let data = {
             "data" : res , 
             "titles" : ["Staff" , "Leave" ,   "Start" , "Resume" , "Created" , "Updated"  , "Delete"] , 
-            "fields" : ["addedEmail"  , "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
+            "fields" : ["fullname"  , "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
           }
+          console.log(res)
         setleaves(data)
     })
      .catch(err => console.log(err))

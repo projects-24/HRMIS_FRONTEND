@@ -37,8 +37,8 @@ export default function LeavePlaning() {
   .then( res => {
     let data = {
       "data" : res , 
-      "titles" : ["Staff" , "Leave" ,   "Start" , "Resume" , "Created" , "Updated" ] , 
-      "fields" : ["addedEmail"  , "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
+      "titles" : ["Staff" ,'Directorate','Section',   "Leave" ,   "Start" , "Resume" , "Created" , "Updated" ] , 
+      "fields" : ["fullname" , 'directorate' , 'section', "leaveTypeName" ,  "proposedStartDate" , "proposedEndDate" , "createdAt" , "updatedAt" ] , 
     }
     setdocs(data)
   console.log(res)
