@@ -4157,9 +4157,9 @@ functions-have-names@^1.2.3:
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
 funuicss@^2.0.10:
-  version "2.0.16"
-  resolved "https://registry.npmjs.org/funuicss/-/funuicss-2.0.16.tgz"
-  integrity sha512-azw6B1+WQQ9gMsxY31Tf4MzMIUkrPyZSUNwM+otnj9YbTxZQzRP4NcR/DVNwUf7xo898xPfiNsMLZw7F+WeSSw==
+  version "2.0.17"
+  resolved "https://registry.npmjs.org/funuicss/-/funuicss-2.0.17.tgz"
+  integrity sha512-wU79nGx+bh+0CmZrApX7rZorzJ4UXpsrDqEdJybOm/kZ0rbvlu4Opf3a5DUQecszHN2JKO84JIDTV3Q/Aqolpw==
   dependencies:
     aos "^2.3.4"
     next "^13.3.1"
