@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { GetRequest, GetToken } from '../components/Functions';
 import Text from 'funuicss/ui/text/Text';
 import Header from '../components/Header';
+import RowFlex from 'funuicss/ui/specials/RowFlex';
 const _Bar = dynamic(() => import("./../components/Chart/_Bar"), { ssr: false })
 const _LineGraph = dynamic(() => import("./../components/Chart/_Line"), { ssr: false })
 export default function Dashboard() {
@@ -25,8 +26,9 @@ export default function Dashboard() {
     if (!data) {
       GetRequest("/dashboard")
         .then(res => {
-          setdata(res)
-          console.log(res[0])
+          if(res[0]){
+            setdata(res)
+          }
         })
         .catch(err => console.log(err))
     }
@@ -42,8 +44,23 @@ export default function Dashboard() {
 
           <div className="">
             <div className="margin-bottom-30">
+    
               <Header title={"Dashboard And Analytics"} sub_title={<>
+                <RowFlex>
+                <div  className='col fit'>
                 Welcome  <span className="text-bold ">{user.title} {user.first_name}   {user.middle_name} {user.last_name} </span>
+                </div>
+                <div>
+                  <span>
+                    Period Left: 
+                  </span>
+                  <span> </span>
+                <span className='text-dark900'>{
+                  user.yearsLeftRetirement
+                }</span>
+                </div>
+              </RowFlex>
+             
               </>} />
             </div>
 
@@ -124,7 +141,7 @@ export default function Dashboard() {
                             ]} />
                            
                           }
-                        </div>
+                        </div> 
                       </div>
                    
 

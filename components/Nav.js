@@ -83,7 +83,7 @@ const Nav = ({ noSideBar, active }) => {
       <div>
         <AppBar
           fixedTop
-          funcss="height-70  "
+          funcss="height-70  z-index-10 card"
           left={
             <img src="/logo.png" className="height-40-max" />
           }

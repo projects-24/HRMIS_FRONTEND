@@ -38,8 +38,8 @@ export default function Profiling() {
         console.log(getDocs)
         let data = {
           "data": getDocs,
-          "titles": ["Staff", "Firstname", "Lastname", "Directorate", "position", "Section", "Region"],
-          "fields": ["id", "firstName", "lastName", "directorate", "position", "section", "region"],
+          "titles": ["Staff", "Firstname", "Lastname", "Directorate", "position", "Section", "Region", 'Gender'],
+          "fields": ["id", "firstName", "lastName", "directorate", "position", "section", "region", 'gender'],
         }
         setdocs(data)
       }).catch(err => console.log(err.message))
@@ -101,18 +101,7 @@ export default function Profiling() {
                 <Table
                   data={docs}
                   pageSize={10}
-                  // customColumns={[
-                  //   {
-                  //     title: 'Actions',
-                  //     render: (data) => (
-                  //       <Circle bg='primary' size={1.5} onClick={() => {
-
-                  //       }}>
-                  //         <PiEye />
-                  //       </Circle>
-                  //     ),
-                  //   },
-                  // ]}
+                  filterableFields={['region', 'section', 'directorate', 'position', 'gender']}
                 />
 
               </div>
