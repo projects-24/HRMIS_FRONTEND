@@ -203,7 +203,7 @@ const Nav = ({ noSideBar, active }) => {
                       />
                     </Link>
                     {
-                      user.position_id != 5 &&
+                      // user.position_id != 5 &&
                       <Link href="/leave/planing">
                         <Button
                           funcss={`text-left flex-start padding-5 text-minified`}
