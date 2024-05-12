@@ -260,7 +260,7 @@ const Nav = ({ noSideBar, active }) => {
 
 
 
-                <div className="margin-top-60 ">
+                <div className="margin-top-30 ">
                   <Button
                     style={{ marginTop: '1rem' }}
                     funcss={`text-left flex-start padding-5 text-minified _card`}

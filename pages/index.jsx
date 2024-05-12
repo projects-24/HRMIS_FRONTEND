@@ -29,10 +29,10 @@ export default function Home() {
         .then((res) => {
           setapi_online(true)
         })
-        // .catch(err => {
-        //   setmessage(err.message)
-        //   setapi_online( () => !api_online)
-        // })
+        .catch(err => {
+          // setmessage(err.message)
+          // setapi_online( () => !api_online)
+        })
   } , [api_online])
 
 

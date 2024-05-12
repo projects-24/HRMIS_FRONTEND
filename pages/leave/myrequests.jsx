@@ -166,7 +166,7 @@ if(startDate && endDate) {
   let weekdays = 0;
 
   // Iterate through each day between start and end dates
-  for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+  for (let date = start; date < end; date.setDate(date.getDate() + 1)) {
     const dayOfWeek = date.getDay();
     // Count only if it's not Saturday (6) or Sunday (0)
     if (dayOfWeek !== 0 && dayOfWeek !== 6) {
@@ -182,13 +182,14 @@ if(startDate && endDate) {
 };
 
 
-const validateDate = (selectedDate) => {
+const validateDate = (selectedDate , input_id) => {
   const dateObject = new Date(selectedDate);
   const dayOfWeek = dateObject.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
   // Check if selected date is a weekday (Monday to Friday)
   if (dayOfWeek >= 1 && dayOfWeek <= 5) {
   } else {
     setmessage('Please select a weekday (Monday to Friday).');
+    FunGet.val(input_id, ' ');
   }
 };
 
@@ -298,7 +299,7 @@ onClick={() => Submit()}
           <Text text='Date Effective' size='small' emp/>
           <Input type="date" id='date_effective'           
           onChange={(e) => {
-            validateDate(e.target.value);
+            validateDate(e.target.value, "#date_effective");
             setStartDate(e.target.value);
           }}
  funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
@@ -306,7 +307,7 @@ onClick={() => Submit()}
           <div className="col sm-6 lg-6 md-6 padding">
           <Text text='Resumption Date' size='small' emp/>
           <Input onChange={(e) => {
-            validateDate(e.target.value);
+            validateDate(e.target.value , "#resumption_date");
             setEndDate(e.target.value);
           }} type="date" id='resumption_date' funcss="full-width" defaultValue={update_doc ? update_doc.leaveTypeName : ''}  />
           </div>

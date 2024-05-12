@@ -28,10 +28,11 @@ export default function Profiling() {
 
 
   useEffect(() => {
-    if (!docs) {
+    if (!docs && token) {
+      console.log(token)
       Axios.get(endPoint + "/staff", {
         headers: {
-          authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       }).then(dataDocs => {
         const getDocs = dataDocs.data

@@ -29,7 +29,10 @@ export default function ViewRequest({selected_data , open , close , current_user
   }
     body={<>
 <StepContainer responsiveMedium  >
-<Step>
+{
+  selected_data.positionId === 5 &&
+  <>
+  <Step>
 <StepHeader>
     <RowFlex gap={1}>
     <Circle bg={selected_data.sectionalHeadApproval ? "success" : "error"} size={2} funcss="raised">
@@ -43,23 +46,14 @@ export default function ViewRequest({selected_data , open , close , current_user
     </RowFlex>
 </StepHeader>
 </Step>
+
 <StepLine />
-<Step>
-<StepHeader>
-    <RowFlex gap={1}>
-    <Circle bg={selected_data.hrApproval ? "success" : "error"} size={2} funcss="raised">
-    {selected_data.hrApproval ? <PiCheck /> : <PiX />}
-</Circle>
-<div>
-<Text text={"HR"} heading="h5"/>
-<div />
-<Text text={"Approval"} size="small" color={"dark200"} bold/>
-</div>
-    </RowFlex>
-</StepHeader>
-</Step>
-<StepLine />
-<Step>
+  </>
+}
+{
+  selected_data.positionId === 4 || selected_data.positionId === 5  ? 
+  <>
+  <Step>
 <StepHeader>
     <RowFlex gap={1}>
     <Circle bg={selected_data.directorApproval ? "success" : "error"} size={2} funcss="raised">
@@ -74,8 +68,28 @@ export default function ViewRequest({selected_data , open , close , current_user
 </StepHeader>
 </Step>
 <StepLine />
+</>
+:''
+}
+  
+  <Step>
+<StepHeader>
+    <RowFlex gap={1}>
+    <Circle bg={selected_data.hrApproval ? "success" : "error"} size={2} funcss="raised">
+    {selected_data.hrApproval ? <PiCheck /> : <PiX />}
+</Circle>
+<div>
+<Text text={"HR"} heading="h5"/>
+<div />
+<Text text={"Approval"} size="small" color={"dark200"} bold/>
+</div>
+    </RowFlex>
+</StepHeader>
+</Step>
+<StepLine />
+
 {
-     current_user.position_id === 1 || current_user.position_id === 2 || current_user.position_id === 3 ? 
+     selected_data.positionId === 2 || selected_data.positionId === 3  ? 
      <>
      <Step>
 <StepHeader>
