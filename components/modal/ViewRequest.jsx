@@ -67,11 +67,10 @@ export default function ViewRequest({selected_data , open , close , current_user
     </RowFlex>
 </StepHeader>
 </Step>
-<StepLine />
 </>
 :''
 }
-  
+<StepLine />
   <Step>
 <StepHeader>
     <RowFlex gap={1}>
