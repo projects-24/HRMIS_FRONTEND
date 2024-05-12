@@ -56,6 +56,9 @@ export default function Home() {
             setloader(false)
             let staffData = doc.data.staff 
             // staffData.retirement_date = doc.data.
+            if(staffData.yearsLeftRetirement.toLowerCase().trim() == 'retired'){
+              window.location.assign('/retired')
+            }else{
             SaveToken(staffData, doc.data.token)
               .then(() => {
                 setsuccess(true)
@@ -63,6 +66,7 @@ export default function Home() {
                   window.location.assign(doc.data.staff.position_id == 5 ? "/user/account" : "/dashboard")
                 }, 2000);
               })
+            }
           }).catch(err => {
             if (err.message === "Request failed with status code 422") {
               setmessage("Wrong credentials")
