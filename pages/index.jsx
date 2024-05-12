@@ -55,18 +55,18 @@ export default function Home() {
           .then(doc => {
             setloader(false)
             let staffData = doc.data.staff 
-            // staffData.retirement_date = doc.data.
-            if(staffData.yearsLeftRetirement.toLowerCase().trim() == 'retired'){
-              window.location.assign('/retired')
-            }else{
+          
             SaveToken(staffData, doc.data.token)
               .then(() => {
                 setsuccess(true)
                 setTimeout(() => {
+                  if(staffData.yearsLeftRetirement.trim() == 'Years: 0, Months: 0, Days: 0, Status: retired'){
+                    window.location.assign('/retired')
+                  }else{
                   window.location.assign(doc.data.staff.position_id == 5 ? "/user/account" : "/dashboard")
+            }
                 }, 2000);
               })
-            }
           }).catch(err => {
             if (err.message === "Request failed with status code 422") {
               setmessage("Wrong credentials")
