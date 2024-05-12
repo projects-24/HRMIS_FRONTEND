@@ -11,6 +11,8 @@ export default function App({ Component, pageProps }) {
           href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
           rel="stylesheet"
         />
+        <link rel="shortcut icon" href="/logo.png" type="image/x-icon" />
+        <title>Ghana Statistical Service</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" />
    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet" />

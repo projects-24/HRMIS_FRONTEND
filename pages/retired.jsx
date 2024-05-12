@@ -5,6 +5,7 @@ import Button from 'funuicss/ui/button/Button'
 import { PiArrowRight } from 'react-icons/pi'
 import Text from 'funuicss/ui/text/Text'
 import { GetToken, SignOut } from '../components/Functions'
+import Section from 'funuicss/ui/specials/Section'
 
 export default function Unauthorized() {
   const [user, setuser] = useState("")
@@ -21,14 +22,16 @@ export default function Unauthorized() {
   return (
     <UnAuthorized 
     code={<>
+    <img src='/logo.png' width={"130px"}/>
+    <Section />
     <Text heading='h3' bold color="dark400" text={`${user.title}. ${user.first_name} ${user.last_name}`}/>
     <Text size='small' bold color="dark500" text={`${user.email}`}/>
     </>} header={<Text size='big' bold text='👏 Happy Pension'/>} 
     content={<>
-    <Text block article text='Congratulations on your outstanding work at Ghana Health Service! Your dedication is truly commendable and makes a real difference' />
+    <Text block article text='🎉 Congratulations on your outstanding work at Ghana Statistical Service! Your dedication is truly commendable and makes a real difference' />
   
     <Text funcss='margin-top-20' capitalize block color='error' bold article text={`
-    Your account  has been deactivated
+    Your account  has been deactivated 🔏
     `} />
   
     </>}
