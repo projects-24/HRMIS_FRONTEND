@@ -16,6 +16,7 @@ import DropDown from 'funuicss/ui/drop/Down'
 import DropItem from 'funuicss/ui/drop/Item'
 import DropMenu from 'funuicss/ui/drop/Menu'
 import Section from "funuicss/ui/specials/Section";
+import Circle from "funuicss/ui/specials/Circle";
 
 const Nav = ({ noSideBar, active }) => {
   const [user, setuser] = useState("")
@@ -130,7 +131,7 @@ const Nav = ({ noSideBar, active }) => {
             <div className="leaveSidebar padding">
 
               <div className="">
-
+              
                 <Link href="/user/account">
                   <Button
                     funcss={`text-left flex-start padding-5 text-minified ${active == '6' ? 'card' : ''}`}

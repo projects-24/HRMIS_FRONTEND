@@ -9,14 +9,18 @@ import Header from '../../components/Header'
 import { GetToken } from '../../components/Functions';
 import Button from "funuicss/ui/button/Button"
 import Table from 'funuicss/ui/table/Table';
-import { PiEye } from 'react-icons/pi';
+import { PiEye, PiTrash, PiUserPlus } from 'react-icons/pi';
 import Circle from "funuicss/ui/specials/Circle"
+import DeleteModal from '../../components/modal/Delete';
+import ToolTip from 'funuicss/ui/tooltip/ToolTip';
+import Tip from 'funuicss/ui/tooltip/Tip';
+
 export default function Profiling() {
   const [loading, setloading] = useState(false)
   const [token, settoken] = useState("")
   const [user, setuser] = useState("")
   const [docs, setdocs] = useState(null)
-
+  const [deleteId, setdeleteId] = useState('')
 
   useEffect(() => {
     GetToken()
@@ -57,7 +61,10 @@ export default function Profiling() {
     return (
       <div className={ "content"}>
 
-
+{
+        deleteId &&
+        <DeleteModal  route={"/staff"} id={deleteId}/>
+      }
      
         {
           loading ?
@@ -74,21 +81,7 @@ export default function Profiling() {
 
             <div className="row-flex fit space-between m-section">
 
-              {
-                user.directorate_id === 2 ?
-                <Link href="/form/personal">
-                  <button className="button raised primary text-bold text-white width-200-min roundEdge"
-                    style={{
-                      position: "fixed",
-                      bottom: "10px",
-                      right: "10px",
-                      zIndex: 5
-                    }}>
-                    <i className="lni lni-user"></i> New Staff
-                  </button>
-                </Link>
-                 :""
-              }
+           
             </div>
 
 
@@ -101,9 +94,32 @@ export default function Profiling() {
 
                 <Table
                   data={docs}
+                  title='Staff Profiling'
                   pageSize={10}
+                  right={<>   {
+                    user.directorate_id === 2 ?
+                    <Link href="/form/personal">
+                     <Button text='Create Staff' bold bg='primary' raised startIcon={<PiUserPlus />}/>
+                    </Link>
+                     :""
+                  }</>}
                   filterableFields={['region', 'section', 'directorate', 'position', 'gender']}
-                />
+                  // customColumns={[
+                  //   {
+                  //     title: 'Actions',
+                  //     render: (data) => (
+                  //       <ToolTip>
+                  //       <span onClick={() => setdeleteId(data.id) }>
+                  //       <Circle size={2} funcss='raised' bg='error'>
+                  //          <PiTrash />
+                  //        </Circle>
+                  //       </span>
+                  // <Tip funcss='z-index-5' tip="left"  animation="ScaleUp" duration={0.12} content="Delete"/>
+                  // </ToolTip>
+                  //     ),
+                  //   }
+                  // ]}
+             />
 
               </div>
               : <Loader />

@@ -26,7 +26,7 @@ export default function DeleteModal({route , id}) {
         setloading(true)
         Axios.delete(EndPoint + route + "/" + id ,  {
             headers: {
-                 authorization: `Bearer ${token}`,
+                 Authorization: `Bearer ${token}`,
                
               }
                

@@ -198,7 +198,6 @@ const Submit = () => {
     OpenModal()
    }}
    outlined 
-   disabled
    outlineSize={0.1}
    fillTextColor='dark900' 
     bg="primary" 

@@ -145,9 +145,7 @@ export default function Personal() {
 
 
     const router = useRouter()
-    const {personal } = router.query
     const form = useRef(null)
-
 
     const submitData = (e)=>{
 
@@ -229,7 +227,7 @@ export default function Personal() {
         setchildrens(availableChildren)
 
         const getYearOfBirth = dob.slice(0,4)
-     
+    
           const data = {
   staff_id: id,
   email: email,
